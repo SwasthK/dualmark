@@ -47,6 +47,14 @@ jobs:
         with:
           registry-url: https://registry.npmjs.org
 
+      # Refresh bun.lock workspace metadata so `bun publish` rewrites
+      # `workspace:*` deps to the tag's actual versions. `bun install
+      # --frozen-lockfile` (in setup) does NOT update workspace version
+      # metadata even when packages/*/package.json drifts from bun.lock.
+      # See oven-sh/bun#20477 (open as of bun 1.3.5).
+      - name: Refresh lockfile workspace metadata
+        run: bun install --lockfile-only
+
       - name: Build packages
         run: bunx turbo run build --filter='./packages/*'
 
