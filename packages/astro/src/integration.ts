@@ -95,7 +95,7 @@ export function createDualmarkIntegration(input: DualmarkAstroConfig): AstroInte
             );
             continue;
           }
-          const converterImport = `import { resolveBuiltInConverter } from "@dualmark/astro/dist/converter-registry.js";`;
+          const converterImport = `import { resolveBuiltInConverter } from "@dualmark/astro";`;
           const detailSource = `${converterImport}
 import { makeCollectionDetailEndpoint } from "@dualmark/astro/endpoints/collection";
 import { getCollection } from "astro:content";

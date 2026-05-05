@@ -3,6 +3,7 @@ export {
   default as dualmark,
   type AstroIntegrationLike,
 } from "./integration.js";
+export { default } from "./integration.js";
 export { resolveConfig, DualmarkConfigError } from "./config-validation.js";
 export type {
   DualmarkAstroConfig,

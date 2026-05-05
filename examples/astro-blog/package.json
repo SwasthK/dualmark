@@ -1,0 +1,18 @@
+{
+  "name": "dualmark-example-astro-blog",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "verify": "node ../../packages/cli/dist/cli.js verify --skip-negotiation http://localhost:4321/blog/hello-world.md"
+  },
+  "dependencies": {
+    "@dualmark/astro": "workspace:*",
+    "@dualmark/core": "workspace:*",
+    "@dualmark/converters": "workspace:*",
+    "astro": "^5.0.0"
+  }
+}

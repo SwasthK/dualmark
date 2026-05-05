@@ -1,0 +1,28 @@
+---
+import { getCollection } from "astro:content";
+const posts = await getCollection("blog");
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Dualmark Example Blog</title>
+    <meta name="description" content="A reference implementation of Dualmark on Astro 5." />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <main>
+      <h1>Dualmark Example Blog</h1>
+      <p>Every page is dual-marked. Append <code>.md</code> to any URL.</p>
+      <ul>
+        {posts.map((p) => (
+          <li>
+            <a href={`/blog/${p.id}`}>{p.data.title}</a>
+            {p.data.description && <span> — {p.data.description}</span>}
+          </li>
+        ))}
+      </ul>
+    </main>
+  </body>
+</html>
