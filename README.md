@@ -125,17 +125,17 @@ Drop-in markdown generation for the 12 page types every marketing site has:
 | Converter | What it's for | Marketing examples |
 |---|---|---|
 | `blog` | Long-form posts | Engineering blog, customer stories |
-| `glossary` | Term definitions | "What is a payment gateway?" |
+| `case-study` | Customer wins | Logos with stats and pull-quote |
+| `changelog` | Release notes | "What's new in v1.4" with grouped changes |
 | `compare` | Us vs. competitor | "Stripe alternative" pages |
-| `case-study` | Customer wins | Logos with stats |
+| `docs` | Documentation | Getting started, API guides |
+| `feature` | Product/feature pages | "Webhooks", "SSO" — problem/solution + FAQ |
+| `glossary` | Term definitions | "What is a payment gateway?" |
 | `legal` | Policy pages | Terms, Privacy, DPA |
+| `pricing` | Pricing tables | Tier comparison with CTAs |
+| `pseo` | Programmatic SEO | "SEO services in San Francisco" with facts + cross-links |
 | `tool` | Standalone calculators | "Currency converter" |
 | `video` | Video landing pages | Webinar replays |
-| `tax` | Tax pSEO | "Tax for SaaS in Germany" |
-| `country` | Country pSEO | "Payments in India" |
-| `currency` | Currency pSEO | "Accept INR online" |
-| `payment-method` | Method pSEO | "Accept UPI" |
-| `product` | Product pages | Product overview + FAQ |
 
 Each converter takes your collection entry → returns clean markdown with the right structure for AI consumption (title, description, breadcrumbs, FAQ extraction, related links). No prompt engineering required.
 
@@ -212,7 +212,7 @@ Plus:
 | Surface | Status |
 |---|---|
 | `@dualmark/core` | 156 tests pass (vitest + fast-check property tests) |
-| `@dualmark/converters` | 19 tests pass |
+| `@dualmark/converters` | 24 tests pass |
 | `@dualmark/cloudflare` | 23 tests pass |
 | `@dualmark/cli` | 15 tests pass |
 | `@dualmark/astro` | 35 tests pass |
@@ -224,7 +224,7 @@ Plus:
 
 ```bash
 pnpm install
-pnpm build && pnpm test && pnpm typecheck   # 248 tests across 5 packages
+pnpm build && pnpm test && pnpm typecheck   # 253 tests across 5 packages
 ```
 
 ---

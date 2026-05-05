@@ -1,34 +1,34 @@
 import {
   blogConverter,
   caseStudyConverter,
+  changelogConverter,
+  compareConverter,
+  docsConverter,
+  featureConverter,
   glossaryConverter,
   legalConverter,
-  compareConverter,
+  pricingConverter,
+  pseoConverter,
   toolConverter,
   videoConverter,
-  taxConverter,
-  countryConverter,
-  paymentMethodConverter,
-  currencyConverter,
-  productConverter,
   type BaseConverterConfig,
-  type Converter,
   type CollectionEntry,
+  type Converter,
 } from "@dualmark/converters";
 
 export type BuiltInConverterName =
   | "blog"
   | "case-study"
+  | "changelog"
+  | "compare"
+  | "docs"
+  | "feature"
   | "glossary"
   | "legal"
-  | "compare"
+  | "pricing"
+  | "pseo"
   | "tool"
-  | "video"
-  | "tax"
-  | "country"
-  | "payment-method"
-  | "currency"
-  | "product";
+  | "video";
 
 export interface ResolveConverterArgs {
   name: string;
@@ -36,45 +36,39 @@ export interface ResolveConverterArgs {
   baseConfig: BaseConverterConfig;
 }
 
-export function resolveBuiltInConverter(args: ResolveConverterArgs): Converter<CollectionEntry<unknown>> {
+export function resolveBuiltInConverter(
+  args: ResolveConverterArgs,
+): Converter<CollectionEntry<unknown>> {
+  const basePath = `/${args.collectionName}`;
+  const cfg = { ...args.baseConfig, basePath };
   switch (args.name as BuiltInConverterName) {
     case "blog":
-      return blogConverter({ ...args.baseConfig, basePath: `/${args.collectionName}` }) as Converter<CollectionEntry<unknown>>;
+      return blogConverter(cfg) as Converter<CollectionEntry<unknown>>;
     case "case-study":
-      return caseStudyConverter({ ...args.baseConfig, basePath: `/${args.collectionName}` }) as Converter<CollectionEntry<unknown>>;
-    case "glossary":
-      return glossaryConverter({ ...args.baseConfig, basePath: `/${args.collectionName}` }) as Converter<CollectionEntry<unknown>>;
-    case "legal":
-      return legalConverter({ ...args.baseConfig, basePath: `/${args.collectionName}` }) as Converter<CollectionEntry<unknown>>;
+      return caseStudyConverter(cfg) as Converter<CollectionEntry<unknown>>;
+    case "changelog":
+      return changelogConverter(cfg) as Converter<CollectionEntry<unknown>>;
     case "compare":
-      return compareConverter({
-        ...args.baseConfig,
-        basePath: `/${args.collectionName}`,
-        ourBrandColumn: "Us",
-      }) as Converter<CollectionEntry<unknown>>;
+      return compareConverter({ ...cfg, ourBrandColumn: "Us" }) as Converter<CollectionEntry<unknown>>;
+    case "docs":
+      return docsConverter(cfg) as Converter<CollectionEntry<unknown>>;
+    case "feature":
+      return featureConverter(cfg) as Converter<CollectionEntry<unknown>>;
+    case "glossary":
+      return glossaryConverter(cfg) as Converter<CollectionEntry<unknown>>;
+    case "legal":
+      return legalConverter(cfg) as Converter<CollectionEntry<unknown>>;
+    case "pricing":
+      return pricingConverter(cfg) as Converter<CollectionEntry<unknown>>;
+    case "pseo":
+      return pseoConverter(cfg) as Converter<CollectionEntry<unknown>>;
     case "tool":
-      return toolConverter({ ...args.baseConfig, basePath: `/${args.collectionName}` }) as Converter<CollectionEntry<unknown>>;
+      return toolConverter(cfg) as Converter<CollectionEntry<unknown>>;
     case "video":
-      return videoConverter({ ...args.baseConfig, basePath: `/${args.collectionName}` }) as Converter<CollectionEntry<unknown>>;
-    case "tax":
-      return taxConverter({ ...args.baseConfig, basePath: `/${args.collectionName}` }) as Converter<CollectionEntry<unknown>>;
-    case "country":
-      return countryConverter({ ...args.baseConfig, basePath: `/${args.collectionName}` }) as Converter<CollectionEntry<unknown>>;
-    case "payment-method":
-      return paymentMethodConverter({
-        ...args.baseConfig,
-        basePath: `/${args.collectionName}`,
-      }) as Converter<CollectionEntry<unknown>>;
-    case "currency":
-      return currencyConverter({ ...args.baseConfig, basePath: `/${args.collectionName}` }) as Converter<CollectionEntry<unknown>>;
-    case "product":
-      return productConverter({
-        ...args.baseConfig,
-        section: { basePath: `/${args.collectionName}`, displayName: args.collectionName, siblings: [] },
-      }) as Converter<CollectionEntry<unknown>>;
+      return videoConverter(cfg) as Converter<CollectionEntry<unknown>>;
     default:
       throw new Error(
-        `Dualmark: unknown built-in converter '${args.name}'. Valid names: blog, case-study, glossary, legal, compare, tool, video, tax, country, payment-method, currency, product. Or pass a function.`,
+        `Dualmark: unknown built-in converter '${args.name}'. Valid names: blog, case-study, changelog, compare, docs, feature, glossary, legal, pricing, pseo, tool, video. Or pass a function.`,
       );
   }
 }

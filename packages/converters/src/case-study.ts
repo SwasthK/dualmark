@@ -3,16 +3,16 @@ import type { BaseConverterConfig, CollectionEntry, Converter } from "./types.js
 
 export interface CaseStudyConverterConfig extends BaseConverterConfig {
   basePath?: string;
-  paymentProvider?: string;
 }
 
 export interface CaseStudyEntryData {
   title: string;
   description?: string;
   company: string;
-  tag?: string;
+  industry?: string;
   publishedDate: Date;
   stats?: Array<{ value: string; label: string }>;
+  quote?: { text: string; attribution?: string };
 }
 
 export function caseStudyConverter(
@@ -26,16 +26,22 @@ export function caseStudyConverter(
         ? "\n## Key Metrics\n\n" + d.stats.map((s) => `- **${s.value}** -- ${s.label}`).join("\n")
         : "";
 
+    const quoteBlock =
+      d.quote && d.quote.text
+        ? `\n## Quote\n\n> ${d.quote.text}` +
+          (d.quote.attribution ? `\n>\n> -- ${d.quote.attribution}` : "")
+        : "";
+
     const md = joinLines(
       `# ${d.title}`,
       d.description && `\n> ${d.description}`,
       "",
       `- **Company**: ${d.company}`,
-      d.tag && `- **Industry**: ${d.tag}`,
-      config.paymentProvider && `- **Payment provider**: ${config.paymentProvider}`,
+      d.industry && `- **Industry**: ${d.industry}`,
       `- **Published**: ${fmtDate(d.publishedDate)}`,
       `- **URL**: ${config.siteUrl}${basePath}/${entry.id}`,
       statsBlock,
+      quoteBlock,
       "\n---",
       entry.body && `\n${cleanBody(entry.body)}`,
       config.brandFooter && "\n---",

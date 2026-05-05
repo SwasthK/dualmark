@@ -51,9 +51,9 @@ interface DualmarkAstroConfig {
 ```ts
 collections: {
   blog: {
-    converter: "blog" | "glossary" | "case-study" | "legal" | "compare"
-              | "tool" | "video" | "tax" | "country" | "payment-method"
-              | "currency" | "product"
+    converter: "blog" | "case-study" | "changelog" | "compare" | "docs"
+              | "feature" | "glossary" | "legal" | "pricing" | "pseo"
+              | "tool" | "video"
               | ((entry) => string),  // or custom function
 
     slugStrategy?: "single" | "nested",  // single = /blog/<slug>, nested = /blog/<...>

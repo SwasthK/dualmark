@@ -18,26 +18,34 @@ export {
 export { toolConverter, type ToolConverterConfig, type ToolEntryData } from "./tool.js";
 export { videoConverter, type VideoConverterConfig, type VideoEntryData } from "./video.js";
 export {
-  taxConverter,
-  countryConverter,
-  paymentMethodConverter,
-  currencyConverter,
-  type TaxConverterConfig,
-  type TaxEntryData,
-  type CountryConverterConfig,
-  type CountryEntryData,
-  type PaymentMethodConverterConfig,
-  type PaymentMethodEntryData,
-  type CurrencyConverterConfig,
-  type CurrencyEntryData,
+  featureConverter,
+  type FeatureConverterConfig,
+  type FeatureEntryData,
+  type FeatureSection,
+  type FeatureRelatedLink,
+} from "./feature.js";
+export {
+  pseoConverter,
+  type PseoConverterConfig,
+  type PseoEntryData,
+  type PseoFact,
+  type PseoRelatedGroup,
 } from "./pseo.js";
 export {
-  productConverter,
-  type ProductConverterConfig,
-  type ProductEntryData,
-  type ProductSibling,
-  type ProductSection,
-} from "./product.js";
+  changelogConverter,
+  type ChangelogConverterConfig,
+  type ChangelogEntryData,
+  type ChangelogChange,
+  type ChangelogChangeType,
+} from "./changelog.js";
+export {
+  pricingConverter,
+  type PricingConverterConfig,
+  type PricingEntryData,
+  type PricingTier,
+} from "./pricing.js";
+export { docsConverter, type DocsConverterConfig, type DocsEntryData } from "./docs.js";
+
 export type {
   BaseConverterConfig,
   CollectionEntry,
@@ -49,16 +57,16 @@ export type {
 export const BUILT_IN_CONVERTERS = [
   "blog",
   "case-study",
+  "changelog",
+  "compare",
+  "docs",
+  "feature",
   "glossary",
   "legal",
-  "compare",
-  "product",
+  "pricing",
+  "pseo",
   "tool",
   "video",
-  "tax",
-  "country",
-  "payment-method",
-  "currency",
 ] as const;
 
 export type BuiltInConverterName = (typeof BUILT_IN_CONVERTERS)[number];

@@ -13,17 +13,17 @@ pnpm add @dualmark/converters @dualmark/core
 | Factory | Domain |
 |---|---|
 | `blogConverter` | Blog posts |
-| `caseStudyConverter` | Case studies (with stats) |
+| `caseStudyConverter` | Case studies (with stats + customer quote) |
+| `changelogConverter` | Release notes (Keep-a-Changelog grouping) |
+| `compareConverter` | Comparison pages (us vs. competitor table) |
+| `docsConverter` | Documentation pages |
+| `featureConverter` | Feature/product pages with siblings, FAQ, problem/solution |
 | `glossaryConverter` | Glossary terms (with learn-more + canonical-blog) |
 | `legalConverter` | Legal pages |
-| `compareConverter` | Comparison pages (us vs competitor table) |
-| `productConverter` | Product pages with siblings, FAQ auto-generation |
+| `pricingConverter` | Pricing tables with tier highlights and CTAs |
+| `pseoConverter` | Programmatic SEO pages with facts + related-link groups |
 | `toolConverter` | Standalone tools |
 | `videoConverter` | Video pages |
-| `taxConverter` | Tax pSEO with country/currency/payment-method cross-links |
-| `countryConverter` | Country pSEO |
-| `paymentMethodConverter` | Payment method pSEO |
-| `currencyConverter` | Currency pSEO |
 
 ## Usage
 

@@ -2,16 +2,16 @@ import { describe, it, expect } from "vitest";
 import {
   blogConverter,
   caseStudyConverter,
+  changelogConverter,
+  compareConverter,
+  docsConverter,
+  featureConverter,
   glossaryConverter,
   legalConverter,
-  compareConverter,
+  pricingConverter,
+  pseoConverter,
   toolConverter,
   videoConverter,
-  taxConverter,
-  countryConverter,
-  paymentMethodConverter,
-  currencyConverter,
-  productConverter,
   BUILT_IN_CONVERTERS,
 } from "../src/index.js";
 
@@ -19,6 +19,7 @@ const SITE = "https://acme.test";
 
 describe("blogConverter", () => {
   const convert = blogConverter({ siteUrl: SITE });
+
   it("renders title, description, dates, and URL", () => {
     const out = convert({
       id: "first-post",
@@ -73,35 +74,48 @@ describe("blogConverter", () => {
 });
 
 describe("caseStudyConverter", () => {
-  const convert = caseStudyConverter({ siteUrl: SITE, paymentProvider: "Acme Inc" });
-  it("renders company, stats, and dates", () => {
+  const convert = caseStudyConverter({ siteUrl: SITE });
+
+  it("renders company, industry, stats, and quote", () => {
     const out = convert({
       id: "widgetco",
       data: {
         title: "WidgetCo Scales 10x",
         description: "How.",
         company: "WidgetCo",
-        tag: "SaaS",
+        industry: "SaaS",
         publishedDate: new Date("2026-04-01T00:00:00Z"),
         stats: [
           { value: "10x", label: "Growth" },
           { value: "$1M", label: "Revenue" },
         ],
+        quote: { text: "Acme changed everything.", attribution: "Jane Doe, CTO" },
       },
       body: "The story.",
     });
     expect(out).toContain("# WidgetCo Scales 10x");
     expect(out).toContain("- **Company**: WidgetCo");
     expect(out).toContain("- **Industry**: SaaS");
-    expect(out).toContain("- **Payment provider**: Acme Inc");
+    expect(out).toContain("- **Published**: 2026-04-01");
     expect(out).toContain("- **10x** -- Growth");
     expect(out).toContain("- **$1M** -- Revenue");
+    expect(out).toContain("> Acme changed everything.");
+    expect(out).toContain("> -- Jane Doe, CTO");
     expect(out).toContain("The story.");
+  });
+
+  it("omits quote section when quote not provided", () => {
+    const out = convert({
+      id: "x",
+      data: { title: "T", company: "C", publishedDate: new Date("2026-01-01T00:00:00Z") },
+    });
+    expect(out).not.toContain("## Quote");
   });
 });
 
 describe("glossaryConverter", () => {
   const convert = glossaryConverter({ siteUrl: SITE });
+
   it("renders title, summary, body, learn more", () => {
     const out = convert({
       id: "api",
@@ -135,6 +149,7 @@ describe("glossaryConverter", () => {
 
 describe("legalConverter", () => {
   const convert = legalConverter({ siteUrl: SITE });
+
   it("renders title, lastUpdated, and URL", () => {
     const out = convert({
       id: "tos",
@@ -149,6 +164,7 @@ describe("legalConverter", () => {
 
 describe("compareConverter", () => {
   const convert = compareConverter({ siteUrl: SITE, ourBrandColumn: "Acme" });
+
   it("renders feature cards and comparison table", () => {
     const out = convert({
       id: "vs-foo",
@@ -175,6 +191,7 @@ describe("compareConverter", () => {
 
 describe("toolConverter", () => {
   const convert = toolConverter({ siteUrl: SITE });
+
   it("renders minimal tool entry", () => {
     const out = convert({
       id: "calc",
@@ -190,6 +207,7 @@ describe("toolConverter", () => {
 
 describe("videoConverter", () => {
   const convert = videoConverter({ siteUrl: SITE });
+
   it("renders video entry with URL", () => {
     const out = convert({
       id: "intro",
@@ -205,201 +223,286 @@ describe("videoConverter", () => {
   });
 });
 
-describe("taxConverter", () => {
-  const convert = taxConverter({
+describe("featureConverter", () => {
+  const convert = featureConverter({
     siteUrl: SITE,
-    countryBasePath: "/country",
-    currencyBasePath: "/currency",
-    parentTitle: "All Tax Guides",
-    platformContext: "## About Acme\n\nTax-friendly.",
-  });
-  it("renders jurisdiction, rate, related links, platform context", () => {
-    const out = convert({
-      id: "uk-vat",
-      data: {
-        title: "UK VAT",
-        description: "VAT in the UK.",
-        jurisdiction: "United Kingdom",
-        taxType: "VAT",
-        standardRate: "20%",
-        relatedCountries: ["united-kingdom"],
-        relatedCurrencies: ["gbp"],
-      },
-    });
-    expect(out).toContain("# UK VAT");
-    expect(out).toContain("- **Jurisdiction**: United Kingdom");
-    expect(out).toContain("- **Tax Type**: VAT");
-    expect(out).toContain("- **Standard Rate**: 20%");
-    expect(out).toContain("[United Kingdom](https://acme.test/country/united-kingdom)");
-    expect(out).toContain("[GBP](https://acme.test/currency/gbp)");
-    expect(out).toContain("**Section:** [All Tax Guides](https://acme.test/tax)");
-    expect(out).toContain("## About Acme");
-  });
-});
-
-describe("countryConverter", () => {
-  const convert = countryConverter({
-    siteUrl: SITE,
-    taxBasePath: "/tax",
-    currencyBasePath: "/currency",
-  });
-  it("renders country, currency, related tax", () => {
-    const out = convert({
-      id: "germany",
-      data: {
-        title: "Germany",
-        countryName: "Germany",
-        currencyCode: "EUR",
-        relatedTax: ["germany-vat"],
-        relatedCurrencies: ["eur"],
-      },
-    });
-    expect(out).toContain("# Germany");
-    expect(out).toContain("- **Country**: Germany");
-    expect(out).toContain("- **Currency**: EUR");
-    expect(out).toContain("[Germany Vat](https://acme.test/tax/germany-vat)");
-    expect(out).toContain("[EUR](https://acme.test/currency/eur)");
-  });
-});
-
-describe("paymentMethodConverter", () => {
-  const convert = paymentMethodConverter({
-    siteUrl: SITE,
-    countryBasePath: "/country",
-    currencyBasePath: "/currency",
-  });
-  it("renders method type and related country/currency", () => {
-    const out = convert({
-      id: "ideal",
-      data: {
-        title: "iDEAL",
-        methodType: "bank-transfer",
-        relatedCountries: ["netherlands"],
-        relatedCurrencies: ["eur"],
-      },
-    });
-    expect(out).toContain("# iDEAL");
-    expect(out).toContain("- **Type**: bank-transfer");
-    expect(out).toContain("[Netherlands](https://acme.test/country/netherlands)");
-  });
-});
-
-describe("currencyConverter", () => {
-  const convert = currencyConverter({
-    siteUrl: SITE,
-    countryBasePath: "/country",
-    paymentMethodBasePath: "/payment-methods",
-  });
-  it("renders code + symbol + related", () => {
-    const out = convert({
-      id: "usd",
-      data: {
-        title: "US Dollar",
-        currencyCode: "USD",
-        currencySymbol: "$",
-        relatedCountries: ["united-states"],
-        relatedPaymentMethods: ["card"],
-      },
-    });
-    expect(out).toContain("# US Dollar");
-    expect(out).toContain("- **Currency**: USD ($)");
-    expect(out).toContain("[United States](https://acme.test/country/united-states)");
-    expect(out).toContain("[Card](https://acme.test/payment-methods/card)");
-  });
-});
-
-describe("productConverter", () => {
-  const convert = productConverter({
-    siteUrl: SITE,
-    section: {
-      basePath: "/products",
-      displayName: "Products",
-      siblings: [
-        { slug: "alpha", title: "Alpha" },
-        { slug: "beta", title: "Beta" },
-        { slug: "gamma", title: "Gamma" },
-      ],
-    },
-    autoFaq: true,
+    basePath: "/features",
+    category: "Platform",
+    siblings: [
+      { slug: "alpha", title: "Alpha" },
+      { slug: "beta", title: "Beta" },
+    ],
   });
 
-  it("renders title, problem/solution, related siblings, FAQ", () => {
+  it("renders title, problem/solution, FAQ, related siblings", () => {
     const out = convert({
       id: "alpha",
       data: {
         title: "Alpha",
-        description: "First product.",
-        theProblem: [{ title: "Slow", content: "Things are slow." }],
-        theSolution: [{ title: "Speed it up", content: "We make it fast." }],
-        targetAudience: ["Developers"],
+        description: "First feature.",
+        problem: [{ title: "Slow", content: "Things are slow." }],
+        solution: [{ title: "Fast", content: "We make it fast." }],
+        audience: ["Developers"],
         useCases: ["High-throughput apps"],
         docsUrl: "https://docs.acme.test/alpha",
         faqs: [{ question: "Is it ready?", answer: "Yes." }],
-        relatedPages: [{ title: "Pricing", href: "/pricing" }],
+        related: [{ title: "Pricing", href: "/pricing" }],
       },
       body: "Long-form description.",
     });
     expect(out).toContain("# Alpha");
-    expect(out).toContain("- **Product area**: Products");
+    expect(out).toContain("- **Category**: Platform");
     expect(out).toContain("- **Documentation**: https://docs.acme.test/alpha");
-    expect(out).toContain("## The Problem");
+    expect(out).toContain("- **For**: Developers");
+    expect(out).toContain("## The problem");
     expect(out).toContain("### Slow");
-    expect(out).toContain("## The Solution");
-    expect(out).toContain("## Who This Is For");
-    expect(out).toContain("- Developers");
-    expect(out).toContain("## Use Cases");
+    expect(out).toContain("## The solution");
+    expect(out).toContain("## Use cases");
+    expect(out).toContain("- High-throughput apps");
     expect(out).toContain("## FAQ");
-    expect(out).toContain("### Is it ready?");
-    expect(out).toContain("### What problem does slow solve?");
-    expect(out).toContain("[Beta](https://acme.test/products/beta)");
-    expect(out).toContain("[Gamma](https://acme.test/products/gamma)");
-    expect(out).not.toContain("[Alpha](https://acme.test/products/alpha)");
-    expect(out).toContain("[Pricing](https://acme.test/pricing)");
-    expect(out).toContain("[API Documentation](https://docs.acme.test/alpha)");
+    expect(out).toContain("Is it ready?");
+    expect(out).toContain("[Beta](https://acme.test/features/beta)");
+    expect(out).not.toContain("[Alpha](https://acme.test/features/alpha)");
+    expect(out).toContain("[Pricing](/pricing)");
   });
 
-  it("disables auto FAQ when autoFaq=false", () => {
-    const c = productConverter({
-      siteUrl: SITE,
-      section: { basePath: "/x", displayName: "X", siblings: [] },
-      autoFaq: false,
-    });
-    const out = c({
-      id: "y",
+  it("works with minimal data", () => {
+    const c = featureConverter({ siteUrl: SITE, basePath: "/x" });
+    const out = c({ id: "y", data: { title: "Y" } });
+    expect(out).toContain("# Y");
+    expect(out).toContain("/x/y");
+  });
+});
+
+describe("pseoConverter", () => {
+  const convert = pseoConverter({ siteUrl: SITE, basePath: "/locations" });
+
+  it("renders title, facts, related groups", () => {
+    const out = convert({
+      id: "san-francisco",
       data: {
-        title: "Y",
-        theProblem: [{ title: "P", content: "p" }],
+        title: "San Francisco",
+        description: "Marketing services in SF.",
+        facts: [
+          { label: "Region", value: "California" },
+          { label: "Timezone", value: "PST" },
+        ],
+        related: [
+          {
+            title: "Nearby cities",
+            basePath: "/locations",
+            slugs: ["oakland", "berkeley"],
+          },
+          {
+            title: "Services",
+            basePath: "/services",
+            slugs: ["seo", "content-marketing"],
+          },
+        ],
+      },
+      body: "Long-form intro.",
+    });
+    expect(out).toContain("# San Francisco");
+    expect(out).toContain("- **Region**: California");
+    expect(out).toContain("- **Timezone**: PST");
+    expect(out).toContain("- **URL**: https://acme.test/locations/san-francisco");
+    expect(out).toContain("## Nearby cities");
+    expect(out).toContain("[Oakland](https://acme.test/locations/oakland)");
+    expect(out).toContain("[Berkeley](https://acme.test/locations/berkeley)");
+    expect(out).toContain("## Services");
+    expect(out).toContain("[Seo](https://acme.test/services/seo)");
+    expect(out).toContain("Long-form intro.");
+  });
+
+  it("supports uppercase title transform", () => {
+    const out = convert({
+      id: "x",
+      data: {
+        title: "X",
+        related: [
+          {
+            title: "Currencies",
+            basePath: "/currency",
+            slugs: ["usd", "eur"],
+            titleTransform: "uppercase",
+          },
+        ],
       },
     });
-    expect(out).not.toContain("What problem does p solve?");
+    expect(out).toContain("[USD](https://acme.test/currency/usd)");
+    expect(out).toContain("[EUR](https://acme.test/currency/eur)");
   });
 
-  it("uses platformContext callback when provided", () => {
-    const c = productConverter({
-      siteUrl: SITE,
-      section: { basePath: "/x", displayName: "X", siblings: [] },
-      platformContext: ({ siteUrl }) => `\n## Platform: ${siteUrl}\n`,
+  it("supports custom title transform", () => {
+    const out = convert({
+      id: "x",
+      data: {
+        title: "X",
+        related: [
+          {
+            title: "Custom",
+            basePath: "/c",
+            slugs: ["foo"],
+            titleTransform: (slug) => `Custom-${slug}`,
+          },
+        ],
+      },
     });
-    const out = c({ id: "y", data: { title: "Y" } });
-    expect(out).toContain(`## Platform: ${SITE}`);
+    expect(out).toContain("[Custom-foo](https://acme.test/c/foo)");
+  });
+});
+
+describe("changelogConverter", () => {
+  const convert = changelogConverter({ siteUrl: SITE });
+
+  it("renders version, release date, and grouped changes", () => {
+    const out = convert({
+      id: "v1-2-0",
+      data: {
+        version: "1.2.0",
+        title: "v1.2.0 -- Webhooks",
+        releasedDate: new Date("2026-04-15T00:00:00Z"),
+        summary: "Webhooks GA.",
+        changes: [
+          { type: "added", description: "New /webhooks endpoint" },
+          { type: "added", description: "Retry logic with exponential backoff" },
+          { type: "fixed", description: "Race condition in token refresh" },
+          { type: "deprecated", description: "Legacy /events endpoint" },
+        ],
+      },
+    });
+    expect(out).toContain("# v1.2.0 -- Webhooks");
+    expect(out).toContain("- **Version**: 1.2.0");
+    expect(out).toContain("- **Released**: 2026-04-15");
+    expect(out).toContain("## Added");
+    expect(out).toContain("- New /webhooks endpoint");
+    expect(out).toContain("- Retry logic with exponential backoff");
+    expect(out).toContain("## Deprecated");
+    expect(out).toContain("- Legacy /events endpoint");
+    expect(out).toContain("## Fixed");
+    expect(out).toContain("- Race condition in token refresh");
+  });
+
+  it("orders sections in canonical Keep-a-Changelog order", () => {
+    const out = convert({
+      id: "v",
+      data: {
+        version: "1.0.0",
+        releasedDate: new Date("2026-01-01"),
+        changes: [
+          { type: "security", description: "Patched CVE" },
+          { type: "added", description: "X" },
+        ],
+      },
+    });
+    const addedIdx = out.indexOf("## Added");
+    const securityIdx = out.indexOf("## Security");
+    expect(addedIdx).toBeGreaterThan(-1);
+    expect(securityIdx).toBeGreaterThan(addedIdx);
+  });
+});
+
+describe("pricingConverter", () => {
+  const convert = pricingConverter({ siteUrl: SITE });
+
+  it("renders tiers with name, price, highlights, CTA", () => {
+    const out = convert({
+      id: "main",
+      data: {
+        title: "Pricing",
+        description: "Simple, transparent pricing.",
+        tiers: [
+          {
+            name: "Starter",
+            price: "$0",
+            billingPeriod: "month",
+            description: "For trying it out.",
+            highlights: ["1 project", "Community support"],
+            cta: { label: "Start free", href: "/signup" },
+          },
+          {
+            name: "Pro",
+            price: "$29",
+            billingPeriod: "month",
+            highlights: ["Unlimited projects", "Email support"],
+            recommended: true,
+            cta: { label: "Upgrade", href: "/upgrade" },
+          },
+        ],
+        faqs: [{ question: "Can I cancel?", answer: "Yes, anytime." }],
+      },
+    });
+    expect(out).toContain("# Pricing");
+    expect(out).toContain("> Simple, transparent pricing.");
+    expect(out).toContain("### Starter");
+    expect(out).toContain("**$0** / month");
+    expect(out).toContain("- 1 project");
+    expect(out).toContain("[Start free](/signup)");
+    expect(out).toContain("### Pro -- recommended");
+    expect(out).toContain("**$29** / month");
+    expect(out).toContain("- Unlimited projects");
+    expect(out).toContain("[Upgrade](/upgrade)");
+    expect(out).toContain("## FAQ");
+    expect(out).toContain("Can I cancel?");
+  });
+
+  it("handles tiers without billing period (one-time)", () => {
+    const out = convert({
+      id: "lifetime",
+      data: {
+        title: "Lifetime",
+        tiers: [{ name: "Lifetime", price: "$199" }],
+      },
+    });
+    expect(out).toContain("**$199**");
+    expect(out).not.toContain("/ undefined");
+  });
+});
+
+describe("docsConverter", () => {
+  const convert = docsConverter({ siteUrl: SITE });
+
+  it("renders title, section, and updated date", () => {
+    const out = convert({
+      id: "getting-started",
+      data: {
+        title: "Getting Started",
+        description: "Install and run.",
+        section: "guides",
+        updatedDate: new Date("2026-04-30T00:00:00Z"),
+      },
+      body: "## Step 1\n\n...",
+    });
+    expect(out).toContain("# Getting Started");
+    expect(out).toContain("> Install and run.");
+    expect(out).toContain("- **Section**: guides");
+    expect(out).toContain("- **URL**: https://acme.test/docs/getting-started");
+    expect(out).toContain("- **Updated**: 2026-04-30");
+    expect(out).toContain("## Step 1");
+  });
+
+  it("works with minimal data", () => {
+    const out = convert({ id: "x", data: { title: "X" } });
+    expect(out).toContain("# X");
+    expect(out).toContain("/docs/x");
   });
 });
 
 describe("BUILT_IN_CONVERTERS export", () => {
-  it("lists all 12 built-in names", () => {
+  it("lists all 12 generic built-in names in alphabetical order", () => {
     expect(BUILT_IN_CONVERTERS).toEqual([
       "blog",
       "case-study",
+      "changelog",
+      "compare",
+      "docs",
+      "feature",
       "glossary",
       "legal",
-      "compare",
-      "product",
+      "pricing",
+      "pseo",
       "tool",
       "video",
-      "tax",
-      "country",
-      "payment-method",
-      "currency",
     ]);
   });
 });
