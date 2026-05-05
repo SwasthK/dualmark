@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { BeamsBackground } from "./beams-bg";
-import { CodeBlock, Tok } from "./code-block";
 import { InstallCommandClient } from "./install-command";
 
 export function Hero() {
@@ -15,109 +14,98 @@ export function Hero() {
           className="group mb-8 inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-bg-elev-1)]/70 px-4 py-1.5 font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--color-fg-muted)] backdrop-blur transition-colors hover:border-[var(--color-accent)]/40 hover:text-[var(--color-accent)]"
         >
           <span className="size-1.5 rounded-full bg-[var(--color-accent)]" />
-          AEO Spec v1.0 — now open source
+          Open source on GitHub
           <span aria-hidden className="opacity-60 transition-transform group-hover:translate-x-0.5">
             →
           </span>
         </Link>
 
         <h1 className="max-w-4xl text-balance text-center text-5xl font-semibold tracking-tight text-[var(--color-fg)] md:text-7xl">
-          AEO infrastructure{" "}
+          ChatGPT cites{" "}
           <span className="bg-gradient-to-r from-[#e8ffa8] via-[#c6fe1e] to-[#9ee847] bg-clip-text text-transparent">
-            built for developers.
+            your competitor.
           </span>
         </h1>
 
         <p className="mt-6 max-w-2xl text-pretty text-center text-lg text-[var(--color-fg-muted)] md:text-xl">
-          One config. One spec. Every page gets a markdown twin for AI agents.
-          <br className="hidden md:inline" />
-          Drop into your stack in 30 seconds. Verify with one command.
+          Not a content problem — an infrastructure problem. Dualmark gives every
+          page a markdown twin AI agents can actually read. Same URL. Same SEO.
+          One config.
         </p>
 
         <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row">
           <Link
-            href="/docs"
+            href="/docs/quickstart"
             className="group inline-flex h-11 items-center gap-2 rounded-lg bg-[var(--color-accent)] px-6 font-semibold text-[var(--color-accent-ink)] transition-all hover:bg-[var(--color-accent-strong)]"
           >
-            Read the docs
+            Quickstart
             <span aria-hidden className="transition-transform group-hover:translate-x-0.5">
               →
             </span>
           </Link>
-          <InstallCommand />
+          <InstallCommandClient />
         </div>
 
-        <div className="mt-20 w-full max-w-3xl animate-[var(--animate-fade-in-up)]">
-          <CodeBlock filename="astro.config.mjs" language="js">
-            <Tok c="kw">import</Tok>
-            <Tok c="punct"> {"{ "}</Tok>
-            <Tok c="var">defineConfig</Tok>
-            <Tok c="punct">{" }"} </Tok>
-            <Tok c="kw">from</Tok>
-            <Tok c="str"> "astro/config"</Tok>
-            <Tok c="punct">;</Tok>
-            {"\n"}
-            <Tok c="kw">import</Tok>
-            <Tok c="var"> dualmark </Tok>
-            <Tok c="kw">from</Tok>
-            <Tok c="str"> "@dualmark/astro"</Tok>
-            <Tok c="punct">;</Tok>
-            {"\n\n"}
-            <Tok c="kw">export default</Tok>
-            <Tok c="fn"> defineConfig</Tok>
-            <Tok c="punct">{"({"}</Tok>
-            {"\n  "}
-            <Tok c="prop">site</Tok>
-            <Tok c="punct">: </Tok>
-            <Tok c="str">"https://yourcompany.com"</Tok>
-            <Tok c="punct">,</Tok>
-            {"\n  "}
-            <Tok c="prop">integrations</Tok>
-            <Tok c="punct">: [</Tok>
-            {"\n    "}
-            <Tok c="fn">dualmark</Tok>
-            <Tok c="punct">{"({"}</Tok>
-            {"\n      "}
-            <Tok c="prop">collections</Tok>
-            <Tok c="punct">: {"{"}</Tok>
-            {"\n        "}
-            <Tok c="prop">blog</Tok>
-            <Tok c="punct">: {"{ "}</Tok>
-            <Tok c="prop">converter</Tok>
-            <Tok c="punct">: </Tok>
-            <Tok c="str">"blog"</Tok>
-            <Tok c="punct">{" },"}</Tok>
-            <Tok c="com">{"   // /blog/*.md auto-generated"}</Tok>
-            {"\n        "}
-            <Tok c="prop">glossary</Tok>
-            <Tok c="punct">: {"{ "}</Tok>
-            <Tok c="prop">converter</Tok>
-            <Tok c="punct">: </Tok>
-            <Tok c="str">"glossary"</Tok>
-            <Tok c="punct">{" },"}</Tok>
-            {"\n      "}
-            <Tok c="punct">{"},"}</Tok>
-            {"\n      "}
-            <Tok c="prop">llmsTxt</Tok>
-            <Tok c="punct">: {"{ "}</Tok>
-            <Tok c="prop">enabled</Tok>
-            <Tok c="punct">: </Tok>
-            <Tok c="kw">true</Tok>
-            <Tok c="punct">{" },"}</Tok>
-            <Tok c="com">{"               // /llms.txt auto-generated"}</Tok>
-            {"\n    "}
-            <Tok c="punct">{"}),"}</Tok>
-            {"\n  "}
-            <Tok c="punct">{"],"}</Tok>
-            {"\n"}
-            <Tok c="punct">{"});"}</Tok>
-          </CodeBlock>
+        <div className="mt-3 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-[var(--color-fg-subtle)]">
+          <span className="flex items-center gap-2">
+            <span className="size-1.5 rounded-full bg-[var(--color-success)]" />
+            30 seconds to install
+          </span>
+          <span className="flex items-center gap-2">
+            <span className="size-1.5 rounded-full bg-[var(--color-success)]" />
+            Verify in CI with one command
+          </span>
+          <span className="flex items-center gap-2">
+            <span className="size-1.5 rounded-full bg-[var(--color-success)]" />
+            Apache 2.0 · zero telemetry
+          </span>
+        </div>
+
+        <div className="mt-16 w-full max-w-3xl animate-[var(--animate-fade-in-up)]">
+          <VerifyTerminal />
         </div>
       </div>
     </section>
   );
 }
 
-function InstallCommand() {
-  return <InstallCommandClient />;
+function VerifyTerminal() {
+  return (
+    <div className="overflow-hidden rounded-[var(--radius-card)] border border-[var(--color-border)] bg-[var(--color-bg-elev-1)] shadow-2xl shadow-black/40">
+      <div className="flex items-center justify-between border-b border-[var(--color-border)] bg-[var(--color-bg-elev-2)] px-4 py-2.5">
+        <div className="flex items-center gap-1.5">
+          <span className="size-3 rounded-full bg-[oklch(0.65_0.22_27)]/70" />
+          <span className="size-3 rounded-full bg-[oklch(0.78_0.16_85)]/70" />
+          <span className="size-3 rounded-full bg-[oklch(0.72_0.19_145)]/70" />
+        </div>
+        <span className="font-mono text-[11px] uppercase tracking-wider text-[var(--color-fg-subtle)]">
+          zsh — dualmark verify
+        </span>
+        <span className="font-mono text-[11px] uppercase tracking-wider text-[var(--color-fg-subtle)] opacity-60">
+          107ms
+        </span>
+      </div>
+      <div className="space-y-3 px-6 py-6 font-mono text-sm">
+        <div>
+          <span className="text-[var(--color-fg-subtle)]">$ </span>
+          <span className="text-[var(--color-accent)]">bunx @dualmark/cli</span>{" "}
+          verify <span className="text-[var(--color-fg)]">https://yoursite.com/pricing</span>
+        </div>
+        <div className="grid grid-cols-[140px_1fr] gap-y-1 pt-2 text-xs sm:text-sm">
+          <span className="text-[var(--color-fg-subtle)]">URL</span>
+          <span className="text-[var(--color-fg)] break-all">https://yoursite.com/pricing</span>
+          <span className="text-[var(--color-fg-subtle)]">Markdown twin</span>
+          <span className="text-[var(--color-fg)] break-all">https://yoursite.com/pricing.md</span>
+          <span className="text-[var(--color-fg-subtle)]">Score</span>
+          <span className="font-medium text-[var(--color-success)]">125 / 125</span>
+          <span className="text-[var(--color-fg-subtle)]">Conformance</span>
+          <span className="font-medium text-[var(--color-success)]">Advanced ✓</span>
+        </div>
+        <div className="flex items-center gap-1 pt-2">
+          <span className="text-[var(--color-fg-subtle)]">$</span>
+          <span className="ml-1 inline-block h-4 w-2 animate-[var(--animate-cursor)] bg-[var(--color-fg)]" />
+        </div>
+      </div>
+    </div>
+  );
 }

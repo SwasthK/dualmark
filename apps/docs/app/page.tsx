@@ -3,22 +3,20 @@ import { Architecture } from "./_components/architecture";
 import { ConformanceDemo } from "./_components/conformance-demo";
 import { Converters } from "./_components/converters";
 import { CTA } from "./_components/cta";
-import { DX } from "./_components/dx";
 import { Hero } from "./_components/hero";
-import { StatsStrip } from "./_components/stats-strip";
-import { Why } from "./_components/why";
+import { Transform } from "./_components/transform";
+import { TrustStrip } from "./_components/trust-strip";
 
 export default function HomePage() {
   return (
     <main className="relative isolate">
       <Hero />
-      <StatsStrip />
-      <DX />
-      <Why />
+      <TrustStrip />
+      <Transform />
       <Architecture />
       <ConformanceDemo />
-      <Converters />
       <Adapters />
+      <Converters />
       <CTA />
     </main>
   );

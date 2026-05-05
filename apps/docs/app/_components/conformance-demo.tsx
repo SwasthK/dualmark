@@ -23,7 +23,7 @@ export function ConformanceDemo() {
             <span className="text-[var(--color-accent)]">a public spec.</span>
           </>
         }
-        description="Run dualmark verify in CI. Fail the build when a page drops below the conformance threshold. No more hoping ChatGPT can read your site."
+        description="Run one command. Get a 0–125 conformance score with line-item failures. Drop it in CI to fail the build when a page regresses. No black-box AI tooling."
       />
 
       <div className="mx-auto max-w-4xl overflow-hidden rounded-[var(--radius-card)] border border-[var(--color-border)] bg-[var(--color-bg-elev-1)] shadow-2xl shadow-black/40">
@@ -44,7 +44,7 @@ export function ConformanceDemo() {
         <div className="space-y-3 px-6 py-6 font-mono text-sm">
           <div>
             <span className="text-[var(--color-fg-subtle)]">$ </span>
-            <span className="text-[var(--color-accent)]">npx @dualmark/cli</span> verify{" "}
+            <span className="text-[var(--color-accent)]">bunx @dualmark/cli</span> verify{" "}
             <span className="text-[var(--color-fg)]">
               https://yourcompany.com/pricing
             </span>

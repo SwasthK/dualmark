@@ -60,7 +60,7 @@ export function Adapters() {
         description="Three first-class integrations today. SvelteKit, Remix, Nuxt, Vercel, Netlify on the roadmap."
       />
 
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
         {adapters.map((a) => (
           <div
             key={a.name}

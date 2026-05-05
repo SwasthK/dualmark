@@ -5,26 +5,21 @@ import { Section } from "./section";
 export function CTA() {
   return (
     <Section className="pt-12">
-      <div className="relative overflow-hidden rounded-[var(--radius-card)] border border-[var(--color-border)] bg-[var(--color-bg-elev-1)]/40 px-6 py-16 text-center md:px-12 md:py-24">
+      <div className="relative overflow-hidden rounded-[var(--radius-card)] border border-[var(--color-border)] bg-[var(--color-bg-elev-1)]/40 px-6 py-16 text-center md:px-12 md:py-20">
         <div className="absolute inset-0 bg-dots opacity-40" />
         <div className="absolute left-1/2 top-1/2 -z-10 size-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(198,254,30,0.18),transparent_60%)]" />
 
         <div className="relative mx-auto flex max-w-2xl flex-col items-center gap-6">
-          <span className="inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-bg)]/80 px-3 py-1 font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--color-accent)] backdrop-blur">
-            <span className="size-1.5 rounded-full bg-[var(--color-accent)]" />
-            Ready to ship
-          </span>
-
-          <h2 className="text-balance text-4xl font-semibold tracking-tight text-[var(--color-fg)] md:text-6xl">
-            Make every page{" "}
+          <h2 className="text-balance text-3xl font-semibold tracking-tight text-[var(--color-fg)] md:text-5xl">
+            Ship it{" "}
             <span className="bg-gradient-to-r from-[#e8ffa8] via-[#c6fe1e] to-[#9ee847] bg-clip-text text-transparent">
-              dual-marked.
+              in 30 seconds.
             </span>
           </h2>
 
-          <p className="text-pretty text-base text-[var(--color-fg-muted)] md:text-lg">
-            30 seconds to install. 80–125 conformance score on your first build.
-            Open source, MIT licensed, no telemetry.
+          <p className="max-w-xl text-pretty text-base text-[var(--color-fg-muted)] md:text-lg">
+            One install. One config. Every page gets a markdown twin and a
+            conformance score. No content rewrite. No vendor lock-in.
           </p>
 
           <div className="mt-2 flex flex-col items-center gap-3 sm:flex-row">
@@ -32,7 +27,7 @@ export function CTA() {
               href="/docs/quickstart"
               className="group inline-flex h-12 items-center gap-2 rounded-lg bg-[var(--color-accent)] px-7 font-semibold text-[var(--color-accent-ink)] transition-all hover:bg-[var(--color-accent-strong)]"
             >
-              Quickstart
+              Read the quickstart
               <span aria-hidden className="transition-transform group-hover:translate-x-0.5">
                 →
               </span>
@@ -46,10 +41,10 @@ export function CTA() {
             </Link>
           </div>
 
-          <div className="mt-4 flex items-center gap-6 text-xs text-[var(--color-fg-subtle)]">
+          <div className="mt-4 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-[var(--color-fg-subtle)]">
             <span className="flex items-center gap-2">
               <span className="size-1.5 rounded-full bg-[var(--color-success)]" />
-              MIT licensed
+              Apache 2.0
             </span>
             <span className="flex items-center gap-2">
               <span className="size-1.5 rounded-full bg-[var(--color-success)]" />
@@ -108,7 +103,7 @@ function Footer() {
             { href: "https://github.com/dodopayments/dualmark", label: "GitHub" },
             {
               href: "https://github.com/dodopayments/dualmark/blob/main/LICENSE",
-              label: "MIT License",
+              label: "Apache 2.0",
             },
           ]}
         />
@@ -116,7 +111,7 @@ function Footer() {
       <div className="flex flex-col items-start justify-between gap-3 border-t border-[var(--color-border)] pt-6 text-xs text-[var(--color-fg-subtle)] md:flex-row md:items-center">
         <span>© {new Date().getFullYear()} Dualmark contributors.</span>
         <span className="font-mono">
-          Spec v1.0 · MIT · pre-1.0 (APIs may change in patch releases)
+          Spec v1.0 · Apache 2.0 · pre-1.0 (APIs may change in patch releases)
         </span>
       </div>
     </footer>

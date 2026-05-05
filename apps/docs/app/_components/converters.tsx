@@ -1,55 +1,62 @@
-import { Section, SectionHeader } from "./section";
+import Link from "next/link";
+import { Section } from "./section";
 
-const converters = [
-  { name: "blog", desc: "Long-form posts", example: "Engineering posts, customer stories" },
-  { name: "case-study", desc: "Customer wins", example: "Logos with stats and pull-quote" },
-  { name: "changelog", desc: "Release notes", example: "Keep-a-Changelog grouped sections" },
-  { name: "compare", desc: "Us vs. competitor", example: '"Stripe alternative" pages' },
-  { name: "docs", desc: "Documentation", example: "Getting started, API guides" },
-  { name: "feature", desc: "Feature pages", example: "Problem/solution + FAQ + siblings" },
-  { name: "glossary", desc: "Term definitions", example: '"What is a payment gateway?"' },
-  { name: "legal", desc: "Policy pages", example: "Terms, Privacy, DPA" },
-  { name: "pricing", desc: "Pricing tables", example: "Tiers with highlights and CTAs" },
-  { name: "pseo", desc: "Programmatic SEO", example: '"SEO services in San Francisco"' },
-  { name: "tool", desc: "Standalone calculators", example: '"Currency converter"' },
-  { name: "video", desc: "Video landing pages", example: "Webinar replays" },
+const CONVERTERS = [
+  "blog",
+  "case-study",
+  "changelog",
+  "compare",
+  "docs",
+  "feature",
+  "glossary",
+  "legal",
+  "pricing",
+  "pseo",
+  "tool",
+  "video",
 ];
 
 export function Converters() {
   return (
-    <Section id="converters">
-      <SectionHeader
-        eyebrow="@dualmark/converters"
-        title={
-          <>
-            12 page types,{" "}
-            <span className="text-[var(--color-accent)]">one converter each.</span>
-          </>
-        }
-        description="Every marketing site has the same shapes. We shipped them. Plug them into your collections — or write your own."
-      />
+    <Section id="converters" className="py-16 md:py-20">
+      <div className="mx-auto max-w-4xl rounded-[var(--radius-card)] border border-[var(--color-border)] bg-[var(--color-bg-elev-1)]/40 px-6 py-10 md:px-10 md:py-12">
+        <div className="flex flex-col items-center gap-4 text-center">
+          <span className="inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-bg)] px-3 py-1 font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--color-accent)]">
+            <span className="size-1.5 rounded-full bg-[var(--color-accent)]" />
+            @dualmark/converters
+          </span>
 
-      <div className="grid grid-cols-1 gap-px overflow-hidden rounded-[var(--radius-card)] border border-[var(--color-border)] bg-[var(--color-border)] sm:grid-cols-2 lg:grid-cols-3">
-        {converters.map((c) => (
-          <div
-            key={c.name}
-            className="group relative flex flex-col gap-2 bg-[var(--color-bg)] p-5 transition-colors hover:bg-[var(--color-bg-elev-1)]"
-          >
-            <div className="flex items-baseline justify-between">
-              <span className="font-mono text-sm font-medium text-[var(--color-accent)]">
-                {c.name}
-              </span>
+          <h2 className="text-balance text-2xl font-semibold tracking-tight text-[var(--color-fg)] md:text-3xl">
+            Drop-in converters for{" "}
+            <span className="text-[var(--color-accent)]">12 page types</span>{" "}
+            every marketing site has.
+          </h2>
+
+          <div className="mt-2 flex flex-wrap items-center justify-center gap-1.5">
+            {CONVERTERS.map((name) => (
               <span
-                aria-hidden
-                className="font-mono text-xs text-[var(--color-fg-subtle)] opacity-0 transition-opacity group-hover:opacity-100"
+                key={name}
+                className="rounded-md border border-[var(--color-border)] bg-[var(--color-bg)] px-2.5 py-1 font-mono text-xs text-[var(--color-fg-muted)]"
               >
-                .ts →
+                {name}
               </span>
-            </div>
-            <div className="text-base text-[var(--color-fg)]">{c.desc}</div>
-            <div className="text-sm text-[var(--color-fg-subtle)]">{c.example}</div>
+            ))}
           </div>
-        ))}
+
+          <p className="mt-2 text-pretty text-sm text-[var(--color-fg-muted)] md:text-base">
+            Each takes your collection entry and returns AI-friendly markdown
+            with the right shape (frontmatter, FAQ extraction, related links).
+            Or write your own — converters are just functions.
+          </p>
+
+          <Link
+            href="/docs/packages/converters"
+            className="mt-2 inline-flex items-center gap-1.5 text-sm font-medium text-[var(--color-fg)] underline-offset-4 hover:text-[var(--color-accent)] hover:underline"
+          >
+            See all 12 converters
+            <span aria-hidden>→</span>
+          </Link>
+        </div>
       </div>
     </Section>
   );
