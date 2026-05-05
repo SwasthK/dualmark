@@ -1,45 +1,47 @@
 ---
-title: Introduction
-description: Open-source AEO infrastructure — every page, dual-marked.
+title: Documentation
+description: Open-source AEO infrastructure — every page, dual-marked. Drop into Astro, Cloudflare, or Next.js in 30 seconds.
 ---
 
-**Dualmark** is open-source **AEO (Answer Engine Optimization) infrastructure** — the framework that gives every site a markdown twin for AI agents alongside its HTML for humans. Same URL, two formats, picked by HTTP content negotiation.
+**Dualmark** gives every page on your site a markdown twin for AI agents alongside its HTML for humans. Same URL, two formats, picked by HTTP content negotiation.
 
 Built and battle-tested at [Dodo Payments](https://dodopayments.com).
 
-## Why dual-mark?
-
-AI search engines (ChatGPT, Claude, Perplexity, Gemini, Google AI Overviews) consume websites differently from humans. They want clean markdown without nav chrome, ads, or JavaScript. Today, every team solves this independently — some append `.md`, some serve `llms.txt`, most do nothing.
-
-Dualmark provides:
-
-1. A **reference implementation** that's transparent to your existing site
-2. A **public spec** any server (in any language) can implement
-3. A **conformance CLI** so you can score any site
-
-## What's in the box
+## Start here
 
 <Cards>
-  <Card title="@dualmark/core" href="/docs/packages/core">
-    Framework-agnostic primitives — content negotiation, AI-bot detection, markdown response, token estimation.
-  </Card>
-  <Card title="@dualmark/converters" href="/docs/packages/converters">
-    12 production-tested converter factories (blog, glossary, tax, country, currency, payment-method, and more).
-  </Card>
-  <Card title="@dualmark/astro" href="/docs/packages/astro">
-    Astro integration — auto-generates `.md` endpoints, ships middleware for Link rel=alternate, generates llms.txt.
-  </Card>
-  <Card title="@dualmark/cloudflare" href="/docs/packages/cloudflare">
-    Cloudflare Workers edge adapter — wraps any upstream Worker, transparently serves markdown to AI bots.
-  </Card>
-  <Card title="@dualmark/cli" href="/docs/packages/cli">
-    `dualmark verify <url>` — conformance test runner against the AEO Spec.
-  </Card>
-  <Card title="AEO Spec v1.0" href="/docs/spec/overview">
-    The public spec any server can implement — HTTP content negotiation, headers contract, AI bot registry, discovery.
-  </Card>
+  <Card title="Quickstart" href="/docs/quickstart" description="Get a fully dual-marked Astro site running in under 2 minutes." />
+  <Card title="Score your site" href="/play" description="Free AI agent readiness check. Get a 0–125 score against the AEO Spec." />
+  <Card title="Core concepts" href="/docs/concepts" description="How content negotiation, the markdown twin pattern, and AI bot detection work." />
+  <Card title="AEO Spec v1.0" href="/docs/spec/overview" description="The public spec any server can implement — RFC-2119 compliant, language-neutral." />
+</Cards>
+
+## Pick your stack
+
+<Cards>
+  <Card title="Astro" href="/docs/integrations/astro" description="Zero-config integration. Auto-generates .md endpoints, middleware, and llms.txt." />
+  <Card title="Cloudflare Workers" href="/docs/integrations/cloudflare-workers" description="Edge adapter that wraps any upstream Worker. Transparent to your existing site." />
+  <Card title="Next.js" href="/docs/integrations/nextjs" description="App Router middleware + route handler. Use @dualmark/core directly." />
+  <Card title="Any framework" href="/docs/integrations/manual" description="Implement the spec yourself in 50 lines. The contract is public." />
+</Cards>
+
+## Packages
+
+<Cards>
+  <Card title="@dualmark/core" href="/docs/packages/core" description="Framework-agnostic primitives — content negotiation, AI-bot detection, markdown responses." />
+  <Card title="@dualmark/converters" href="/docs/packages/converters" description="12 production-tested page-type converters — blog, glossary, pricing, changelog, and more." />
+  <Card title="@dualmark/astro" href="/docs/packages/astro" description="Astro 5 integration with auto-generated routes and llms.txt." />
+  <Card title="@dualmark/cloudflare" href="/docs/packages/cloudflare" description="Workers edge adapter with hooks for analytics and transformations." />
+  <Card title="@dualmark/cli" href="/docs/packages/cli" description="Conformance test runner. Drop into CI to fail builds below threshold." />
+</Cards>
+
+## Conformance
+
+<Cards>
+  <Card title="The verify CLI" href="/docs/conformance/cli" description="Run dualmark verify against any URL. Get a per-check report and exit code." />
+  <Card title="Scoring & levels" href="/docs/conformance/scoring" description="What each check is worth. Basic / Standard / Advanced thresholds explained." />
 </Cards>
 
 ## Status
 
-Pre-1.0. APIs may change. The AEO Spec is authoritative; framework code follows.
+Pre-1.0. APIs may change in patch releases. The [AEO Spec](/docs/spec/overview) is authoritative — framework code follows.

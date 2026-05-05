@@ -1,4 +1,17 @@
 {
   "title": "Documentation",
-  "pages": ["index", "quickstart", "concepts", "integrations", "packages", "conformance", "spec"]
+  "pages": [
+    "index",
+    "---Get started---",
+    "quickstart",
+    "concepts",
+    "---Integrate---",
+    "integrations",
+    "---API reference---",
+    "packages",
+    "---Conformance---",
+    "conformance",
+    "---Spec---",
+    "spec"
+  ]
 }
