@@ -57,7 +57,7 @@ curl -sI -H "User-Agent: GPTBot/1.0" -H "Accept: text/markdown" http://localhost
 curl -sI http://localhost:3000/posts/hello.md
 
 # Conformance
-bun run verify           # → Score 125/125, exit 0
+bun run verify           # → Score 120/125 under `next dev` (Vary header strips on local dev; full 125/125 in production behind a Cloudflare Worker)
 ```
 
 > **Production note**: `next start` serves prerendered 404s for unknown slugs

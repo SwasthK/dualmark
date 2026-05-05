@@ -60,7 +60,7 @@ Review and merge that PR when you're ready to cut a release.
 After the version PR merges:
 
 1. Go to **GitHub → Releases → Draft a new release**.
-2. Click **Choose a tag** and create a new tag matching the version, e.g. `v0.2.0`.
+2. Click **Choose a tag** and create a new tag matching the version, e.g. `v0.3.0`.
 3. Set release title and notes (the changelog entry is a good source).
 4. Click **Publish release**.
 
@@ -69,7 +69,9 @@ Publishing the release fires the **`Release (npm publish)`** workflow which:
 - Checks out the exact tag
 - Builds + tests + typechecks all `@dualmark/*` packages
 - Verifies at least one package version matches the tag
-- Runs `bun run changeset publish` with `NPM_CONFIG_PROVENANCE=true`
+- Publishes each `packages/*` to npm via `bun publish --access public --tag latest` (which rewrites `workspace:*` deps to the actual pinned version at pack time)
+- Auth via `NPM_CONFIG_TOKEN` env (the only reliable auth path for `bun publish` in CI)
+- Skips packages that are already at that version on the registry (idempotent re-runs)
 
 If anything fails, the release is on GitHub but nothing is on npm — fix and re-run the workflow via **Actions → Release → Run workflow** with the tag as input.
 

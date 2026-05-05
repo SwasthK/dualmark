@@ -147,7 +147,7 @@ This is a Next.js + Vercel architectural quirk, not a Dualmark bug. The practica
 - **Local `next dev`**: 120/125 (only `html.vary` fails — middleware sets `Vary` directly on route handler responses without the prerender layer in the way)
 - **Vercel production**: 110/125 (both `md.vary` and `html.vary` fail because Vercel's edge cache layer strips middleware-set Vary)
 
-Both 110 and 120 are still **Standard conformance (≥80%)**. This is what `dualmark.dev` itself ships with.
+Both 110 and 120 are still **Standard conformance (≥80%)**. This is what `dualmark.dev` itself ships with — and it's the same level Dodo Payments runs in production, where they saw a [5× lift in AI agent traffic over 2 months](https://dualmark.dev/#case-study) on Standard-conformant pages.
 
 **Three options, in order of cost:**
 

@@ -85,12 +85,12 @@ export default createAEOWorker({
 
 ## Verify
 
-The example at `examples/astro-cloudflare-full` scores a perfect **125/125** under `wrangler dev`:
+The example at `examples/astro-cloudflare-full` scores a perfect **125/125** under `wrangler dev` — the same setup Dodo Payments runs in production (and where they saw a [5× lift in AI agent traffic](https://dualmark.dev/#case-study) over 2 months):
 
 ```bash
 wrangler dev
 # new terminal:
-npx @dualmark/cli verify http://localhost:8787/blog/your-post
+bunx @dualmark/cli verify http://localhost:8787/blog/your-post
 ```
 
 ## What it does

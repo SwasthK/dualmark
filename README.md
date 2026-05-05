@@ -155,7 +155,7 @@ const md = convert(yourComparePage);  // → battle-tested markdown layout
 ## Verify any site against the spec
 
 ```bash
-npx @dualmark/cli verify https://yourcompany.com/pricing
+bunx @dualmark/cli verify https://yourcompany.com/pricing
 ```
 
 ```
@@ -182,7 +182,7 @@ Three conformance levels — **Basic** (60%), **Standard** (80%), **Advanced** (
 
 ```yaml
 # .github/workflows/ci.yml
-- run: npx @dualmark/cli verify https://staging.yourcompany.com/pricing
+- run: bunx @dualmark/cli verify https://staging.yourcompany.com/pricing
   # exits non-zero if any required check fails
 ```
 
@@ -211,10 +211,10 @@ Plus:
 
 | Surface | Status |
 |---|---|
-| `@dualmark/core` | 156 tests pass (vitest + fast-check property tests) |
+| `@dualmark/core` | 167 tests pass (vitest + fast-check property tests) |
 | `@dualmark/converters` | 24 tests pass |
 | `@dualmark/cloudflare` | 23 tests pass |
-| `@dualmark/cli` | 15 tests pass |
+| `@dualmark/cli` | 17 tests pass |
 | `@dualmark/astro` | 35 tests pass |
 | `examples/astro-blog` | **80/80** under `astro dev` (`--skip-negotiation`) |
 | `examples/astro-cloudflare-full` | **125/125 perfect** under `wrangler dev` (full negotiation) |
@@ -224,7 +224,7 @@ Plus:
 
 ```bash
 bun install
-bun run build && bun run test && bun run typecheck   # 253 tests across 5 packages
+bun run build && bun run test && bun run typecheck   # 266 tests across 5 packages
 ```
 
 ---

@@ -77,7 +77,7 @@ export default defineConfig({
 
 `blog`, `case-study`, `changelog`, `compare`, `docs`, `feature`, `glossary`, `legal`, `pricing`, `pseo`, `tool`, `video`
 
-Pass any string from this list as `converter`, or pass a function (currently not serializable into generated routes — coming in v0.2).
+Pass any string from this list as `converter`, or pass a function (currently not serializable into generated routes — planned for a future release).
 
 ## Where the generated files live
 

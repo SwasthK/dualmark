@@ -24,7 +24,7 @@ In another:
 ```bash
 bun run verify
 # or directly:
-npx @dualmark/cli verify http://localhost:4321/blog/hello-world
+bunx @dualmark/cli verify http://localhost:4321/blog/hello-world
 ```
 
 Expected output: **Score 80/80 with `--skip-negotiation`** (full negotiation requires a public deployment behind a real edge), exit code `0`.

@@ -66,10 +66,10 @@ bun run wrangler:deploy
 After `wrangler:dev`:
 
 ```bash
-npx @dualmark/cli verify http://localhost:8787/blog/edge-aeo
+bunx @dualmark/cli verify http://localhost:8787/blog/edge-aeo
 ```
 
-Expect a high score because Wrangler preserves the response headers our worker sets.
+Expect **125/125 (perfect)** — Wrangler preserves the response headers our worker sets, and `createAEOWorker` is the only adapter that ships the full negotiation set out of the box.
 
 ## License
 
