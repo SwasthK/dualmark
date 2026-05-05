@@ -95,8 +95,8 @@ function Footer() {
           links={[
             { href: "/docs/quickstart", label: "Quickstart" },
             { href: "/docs/integrations/astro", label: "Astro" },
-            { href: "/docs/integrations/cloudflare-workers", label: "Cloudflare" },
             { href: "/docs/integrations/nextjs", label: "Next.js" },
+            { href: "/docs/integrations/cloudflare-workers", label: "Cloudflare" },
             { href: "/play", label: "Playground" },
           ]}
         />

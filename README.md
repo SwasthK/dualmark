@@ -52,23 +52,6 @@ pnpm build && pnpm dualmark verify https://localhost:4321/blog/your-post
 
 That's it. Every blog post has a markdown twin at `/blog/<slug>.md`. `llms.txt` is generated. Every HTML response advertises its twin via `Link: <…>; rel="alternate"; type="text/markdown"`. ChatGPT crawler sees clean markdown. Your existing pages don't change.
 
-### Cloudflare Workers (60 seconds)
-
-Wrap your existing Worker. AI bots get markdown at the edge — single-digit-ms first-byte from 300+ cities.
-
-```ts
-import { createAEOWorker } from "@dualmark/cloudflare";
-import upstream from "./your-existing-worker.js";
-
-export default createAEOWorker({
-  upstream,
-  trailingSlash: "never",
-  analytics: { binding: "AI_AGENT_ANALYTICS" },  // optional: track which bot, what page
-});
-```
-
-[Full example with `wrangler dev` → 125/125 conformance score →](./examples/astro-cloudflare-full)
-
 ### Next.js 15 App Router
 
 No adapter package needed — `@dualmark/core` plugs into middleware + a route handler.
@@ -80,6 +63,23 @@ import { detectAIBot, negotiateFormat } from "@dualmark/core";
 ```
 
 [Full Next.js example →](./examples/nextjs-app-router)
+
+### Cloudflare Workers (60 seconds)
+
+Wrap your existing Worker. AI bots get markdown at the edge — single-digit-ms first-byte from 300+ cities.
+
+```ts
+import { createAEOWorker } from "@dualmark/cloudflare";
+import upstream from "./your-existing-worker.js";
+
+export default createAEOWorker({
+  upstream,
+  trailingSlash: "never",
+  analytics: { binding: "AI_AGENT_ANALYTICS" },
+});
+```
+
+[Full example with `wrangler dev` → 125/125 conformance score →](./examples/astro-cloudflare-full)
 
 ---
 

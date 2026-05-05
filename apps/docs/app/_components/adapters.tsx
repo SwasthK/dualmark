@@ -12,16 +12,6 @@ const adapters = [
     glyph: "▲",
   },
   {
-    name: "Cloudflare",
-    pkg: "@dualmark/cloudflare",
-    desc: "Workers edge adapter. Wraps any upstream Worker. Hooks for analytics + telemetry.",
-    install: "pnpm add @dualmark/cloudflare",
-    score: "125/125",
-    status: "Stable",
-    accent: "oklch(0.82 0.16 70)",
-    glyph: "☁",
-  },
-  {
     name: "Next.js",
     pkg: "@dualmark/core",
     desc: "App Router middleware + route handler. Use @dualmark/core directly — no adapter needed.",
@@ -30,6 +20,16 @@ const adapters = [
     status: "Stable",
     accent: "oklch(0.985 0 0)",
     glyph: "N",
+  },
+  {
+    name: "Cloudflare",
+    pkg: "@dualmark/cloudflare",
+    desc: "Workers edge adapter. Wraps any upstream Worker. Hooks for analytics + telemetry.",
+    install: "pnpm add @dualmark/cloudflare",
+    score: "125/125",
+    status: "Stable",
+    accent: "oklch(0.82 0.16 70)",
+    glyph: "☁",
   },
 ];
 
