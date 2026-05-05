@@ -73,4 +73,4 @@ Expect a high score because Wrangler preserves the response headers our worker s
 
 ## License
 
-MIT
+Apache 2.0

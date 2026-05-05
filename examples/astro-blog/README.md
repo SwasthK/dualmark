@@ -47,4 +47,4 @@ This example uses Astro's default **static** output. The `.md` files are written
 
 ## License
 
-MIT
+Apache 2.0

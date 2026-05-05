@@ -260,7 +260,7 @@ bun run typecheck
 
 ## License
 
-MIT — see [LICENSE](./LICENSE). Use it for anything. Attribution appreciated, never required.
+Apache 2.0 — see [LICENSE](./LICENSE) and [NOTICE](./NOTICE). Includes a patent grant. Use it for anything; attribution appreciated, never required.
 
 ## Status
 

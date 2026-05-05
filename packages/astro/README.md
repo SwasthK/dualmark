@@ -85,4 +85,4 @@ Pass any string from this list as `converter`, or pass a function (currently not
 
 ## License
 
-MIT
+Apache 2.0

@@ -32,4 +32,4 @@ The spec lives at `/spec/*.md` (single source of truth). `bun run sync-spec` (au
 
 ## License
 
-MIT
+Apache 2.0

@@ -63,4 +63,4 @@ When negotiation is enabled (default):
 
 ## License
 
-MIT
+Apache 2.0

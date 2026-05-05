@@ -58,7 +58,7 @@ export const softwareApplicationSchema = {
   url: SITE_URL,
   downloadUrl: "https://www.npmjs.com/package/@dualmark/core",
   softwareVersion: "0.x",
-  license: "https://opensource.org/licenses/MIT",
+  license: "https://www.apache.org/licenses/LICENSE-2.0",
   offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
   author: { "@id": `${SITE_URL}#organization` },
   programmingLanguage: "TypeScript",

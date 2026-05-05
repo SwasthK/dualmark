@@ -47,4 +47,4 @@ Each factory takes a config object and returns a `(entry) => string` converter. 
 
 ## License
 
-MIT
+Apache 2.0

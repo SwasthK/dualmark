@@ -68,4 +68,4 @@ bun run verify           # → Score 125/125, exit 0
 
 ## License
 
-MIT
+Apache 2.0

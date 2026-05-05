@@ -83,4 +83,4 @@ Be excellent to each other. We follow the [Contributor Covenant](https://www.con
 
 ## License
 
-By contributing, you agree your work is licensed under the MIT License.
+By contributing, you agree your work is licensed under the Apache License 2.0 (see [LICENSE](./LICENSE) and [NOTICE](./NOTICE)).

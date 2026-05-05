@@ -38,7 +38,7 @@ See https://dualmark.dev/docs/quickstart for the full integration guide.
 
 ## License
 
-MIT
+Apache 2.0
 `;
 
 export function GET(): Response {
