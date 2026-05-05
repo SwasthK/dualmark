@@ -137,3 +137,19 @@ export async function GET(_req: Request, ctx: { params: Promise<{ path: string[]
 <Callout>
   **Production note**: `next start` serves prerendered 404s for unknown slugs (like `.md` suffixes) from cache *before* invoking middleware, which can shadow the rewrite. On Vercel and other production-grade hosts, middleware runs at the edge before any cache layer, so this isn't an issue. For local conformance verification, use `next dev`.
 </Callout>
+
+## Known limitation: `html.vary` recommended check
+
+If you set `Vary: Accept` from `middleware.ts` (as the example above does) and serve **prerendered** HTML pages, Next.js's `base-server` overwrites your `Vary` header with its own internal value (`rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch, Accept-Encoding`) before sending the response. The middleware-set `Link` header survives — but `Vary` does not.
+
+This is a Next.js architectural quirk, not a Dualmark bug. The result is that on a prerendered `/posts/<slug>` route you'll lose the `html.vary` recommended check (5 points) and cap at **120/125** instead of 125/125.
+
+**Three options, in order of cost:**
+
+1. **Accept the 5pt loss** — 120/125 is still **Standard conformance (96%)**. The check is `recommended`, not `required`. This is what `dualmark.dev` itself does. (No code change.)
+
+2. **Disable prerender on AEO-eligible routes** — add `export const dynamic = "force-dynamic"` to `app/posts/[slug]/page.tsx`. Costs ~50ms TTFB per page and disables Vercel's static caching. Gets you 125/125.
+
+3. **Wrap your Next.js output in a Cloudflare Worker** — deploy via `@dualmark/cloudflare`'s `createAEOWorker`. The worker controls `Vary` end-to-end. Gets you 125/125 + edge bot detection.
+
+For most marketing sites, **option 1 is correct** — the 5pt loss does not change the conformance level (Standard is achieved at 80%+).
