@@ -5,7 +5,7 @@ Production-tested markdown converter factories for the Dualmark AEO framework.
 ## Install
 
 ```bash
-pnpm add @dualmark/converters @dualmark/core
+bun add @dualmark/converters @dualmark/core
 ```
 
 ## Available converters

@@ -6,7 +6,7 @@ const features = [
     detail:
       "One npm package. Three lines of config. Markdown twins generated for every page.",
     icon: BoltIcon,
-    code: "$ pnpm add @dualmark/astro",
+    code: "$ bun add @dualmark/astro",
   },
   {
     title: "Type-safe everything",
@@ -56,7 +56,7 @@ export function DX() {
             <span className="text-[var(--color-accent)]">ship.</span>
           </>
         }
-        description="Every API is type-safe, edge-compatible, and obvious. We optimized for the time between `pnpm add` and `git push`."
+        description="Every API is type-safe, edge-compatible, and obvious. We optimized for the time between `bun add` and `git push`."
       />
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">

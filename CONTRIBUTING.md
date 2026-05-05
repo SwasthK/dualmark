@@ -4,12 +4,12 @@ Thanks for your interest in contributing.
 
 ## Development setup
 
-Requirements: Node 18+, pnpm 9+.
+Requirements: Node 18+, bun 1.3+.
 
 ```bash
-pnpm install
-pnpm build
-pnpm test
+bun install
+bun run build
+bun run test
 ```
 
 ## Project layout
@@ -30,15 +30,15 @@ dualmark/
 ## Workflow
 
 1. Fork and branch from `main`.
-2. Make changes. Add tests. Run `pnpm test` and `pnpm typecheck`.
-3. Add a changeset: `pnpm changeset`. Pick affected packages and bump type.
+2. Make changes. Add tests. Run `bun run test` and `bun run typecheck`.
+3. Add a changeset: `bun run changeset`. Pick affected packages and bump type.
 4. Open a PR. CI must pass.
 
 ## Conventions
 
 - TypeScript strict mode.
 - No `as any`, no `@ts-ignore`, no `@ts-expect-error` without an inline reason.
-- Prefer existing code style. Run `pnpm format` (Prettier) before committing.
+- Prefer existing code style. Run `bun run format` (Prettier) before committing.
 - Tests live next to source as `*.test.ts`.
 
 ## Release flow (maintainers)
@@ -69,7 +69,7 @@ Publishing the release fires the **`Release (npm publish)`** workflow which:
 - Checks out the exact tag
 - Builds + tests + typechecks all `@dualmark/*` packages
 - Verifies at least one package version matches the tag
-- Runs `pnpm changeset publish` with `NPM_CONFIG_PROVENANCE=true`
+- Runs `bun run changeset publish` with `NPM_CONFIG_PROVENANCE=true`
 
 If anything fails, the release is on GitHub but nothing is on npm — fix and re-run the workflow via **Actions → Release → Run workflow** with the tag as input.
 

@@ -36,15 +36,15 @@ app/
 ## Run
 
 ```bash
-pnpm install
-pnpm dev               # http://localhost:3000 (recommended for verify)
-pnpm build             # production build (uses generateStaticParams)
-pnpm start             # serve production build
+bun install
+bun run dev               # http://localhost:3000 (recommended for verify)
+bun run build             # production build (uses generateStaticParams)
+bun run start             # serve production build
 ```
 
 ## Verify
 
-In one terminal: `pnpm dev`. In another:
+In one terminal: `bun run dev`. In another:
 
 ```bash
 # As browser → HTML with Link header
@@ -57,14 +57,14 @@ curl -sI -H "User-Agent: GPTBot/1.0" -H "Accept: text/markdown" http://localhost
 curl -sI http://localhost:3000/posts/hello.md
 
 # Conformance
-pnpm verify           # → Score 125/125, exit 0
+bun run verify           # → Score 125/125, exit 0
 ```
 
 > **Production note**: `next start` serves prerendered 404s for unknown slugs
 > (like `/posts/hello.md`) from cache *before* invoking middleware, which can
 > shadow the rewrite. On Vercel and other production-grade hosts, middleware
 > runs at the edge before any cache layer, so this isn't an issue. For local
-> conformance verification, use `pnpm dev`.
+> conformance verification, use `bun run dev`.
 
 ## License
 

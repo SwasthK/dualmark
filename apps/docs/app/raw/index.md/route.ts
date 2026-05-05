@@ -15,7 +15,7 @@ That's not a content problem. It's an **infrastructure problem**. AI search engi
 ## Quickstart
 
 \`\`\`bash
-pnpm add @dualmark/astro
+bun add @dualmark/astro
 \`\`\`
 
 See https://dualmark.dev/docs/quickstart for the full integration guide.

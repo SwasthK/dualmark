@@ -7,7 +7,7 @@ Zero runtime dependencies. ESM + CJS. Strict TypeScript.
 ## Install
 
 ```bash
-pnpm add @dualmark/core
+bun add @dualmark/core
 ```
 
 ## What's in it

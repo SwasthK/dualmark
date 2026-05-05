@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-const COMMAND = "pnpm add @dualmark/astro";
+const COMMAND = "bun add @dualmark/astro";
 
 export function InstallCommandClient() {
   const [copied, setCopied] = useState(false);

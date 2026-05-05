@@ -17,4 +17,5 @@ coverage/
 .idea/
 *.tsbuildinfo
 .pnpm-store/
+.bun/
 tmp/

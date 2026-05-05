@@ -24,14 +24,14 @@ Production-grade reference: a static Astro site deployed to Cloudflare Workers, 
 ## Build
 
 ```bash
-pnpm install
-pnpm build       # astro build → ./dist/ with HTML + .md twins + llms.txt
+bun install
+bun run build       # astro build → ./dist/ with HTML + .md twins + llms.txt
 ```
 
 ## Run locally with Wrangler
 
 ```bash
-pnpm wrangler:dev   # http://localhost:8787
+bun run wrangler:dev   # http://localhost:8787
 ```
 
 Test the negotiation:
@@ -50,7 +50,7 @@ curl -sI http://localhost:8787/blog/edge-aeo.md
 ## Deploy
 
 ```bash
-pnpm wrangler:deploy
+bun run wrangler:deploy
 ```
 
 ## What's wired up

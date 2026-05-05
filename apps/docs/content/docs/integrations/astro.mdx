@@ -5,10 +5,10 @@ description: Add Dualmark to an Astro 5 site with one integration.
 
 ## Install
 
-<Tabs items={["pnpm", "npm", "yarn", "bun"]}>
-<Tab value="pnpm">
+<Tabs items={["bun", "npm", "yarn"]}>
+<Tab value="bun">
 ```bash
-pnpm add @dualmark/astro @dualmark/core @dualmark/converters
+bun add @dualmark/astro @dualmark/core @dualmark/converters
 ```
 </Tab>
 <Tab value="npm">
@@ -19,11 +19,6 @@ npm install @dualmark/astro @dualmark/core @dualmark/converters
 <Tab value="yarn">
 ```bash
 yarn add @dualmark/astro @dualmark/core @dualmark/converters
-```
-</Tab>
-<Tab value="bun">
-```bash
-bun add @dualmark/astro @dualmark/core @dualmark/converters
 ```
 </Tab>
 </Tabs>
@@ -120,7 +115,7 @@ You can also pass a custom function: `converter: (entry) => string`.
 ## Verify
 
 ```bash
-pnpm dev
+bun run dev
 # new terminal:
 npx @dualmark/cli verify http://localhost:4321/blog/your-post
 ```

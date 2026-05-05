@@ -99,7 +99,7 @@ export function renderOgImage({ title, description, eyebrow, footer }: OgConfig)
           fontFamily: "monospace",
         }}
       >
-        <span>{footer ?? "$ pnpm add @dualmark/astro"}</span>
+        <span>{footer ?? "$ bun add @dualmark/astro"}</span>
         <span>dualmark.dev</span>
       </div>
     </div>,

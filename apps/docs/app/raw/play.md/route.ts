@@ -21,7 +21,7 @@ Returns a JSON \`VerifyReport\` with score, level (Below Basic / Basic / Standar
 ## Or use the CLI locally
 
 \`\`\`bash
-pnpm dlx @dualmark/cli verify https://yoursite.com/your-page
+bunx @dualmark/cli verify https://yoursite.com/your-page
 \`\`\`
 
 Same engine, same checks, exits non-zero on failure. Drop into CI to fail builds when conformance drops.

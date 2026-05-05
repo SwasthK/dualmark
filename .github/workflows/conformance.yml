@@ -22,9 +22,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
-      - run: pnpm turbo run build --filter='@dualmark/*'
+      - run: bunx turbo run build --filter='@dualmark/*'
       - name: Build astro-blog example
-        run: pnpm --filter dualmark-example-astro-blog build
+        run: bun run --filter dualmark-example-astro-blog build
       - name: Verify astro-blog under astro dev
         working-directory: examples/astro-blog
         run: |
@@ -40,9 +40,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
-      - run: pnpm turbo run build --filter='@dualmark/*'
+      - run: bunx turbo run build --filter='@dualmark/*'
       - name: Build astro-cloudflare-full
-        run: pnpm --filter dualmark-example-astro-cloudflare-full build
+        run: bun run --filter dualmark-example-astro-cloudflare-full build
       - name: Verify under wrangler dev (full negotiation)
         working-directory: examples/astro-cloudflare-full
         run: |
@@ -58,7 +58,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
-      - run: pnpm turbo run build --filter='@dualmark/*'
+      - run: bunx turbo run build --filter='@dualmark/*'
       - name: Run nextjs-app-router under next dev
         working-directory: examples/nextjs-app-router
         run: |
@@ -74,9 +74,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
-      - run: pnpm turbo run build --filter='@dualmark/*'
+      - run: bunx turbo run build --filter='@dualmark/*'
       - name: Build dualmark-docs (the website itself)
-        run: pnpm --filter dualmark-docs build
+        run: bun run --filter dualmark-docs build
       - name: Start dualmark-docs and verify against the AEO Spec
         working-directory: apps/docs
         run: |

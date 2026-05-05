@@ -5,7 +5,7 @@ Astro integration for the Dualmark AEO framework.
 ## Install
 
 ```bash
-pnpm add @dualmark/astro @dualmark/core @dualmark/converters
+bun add @dualmark/astro @dualmark/core @dualmark/converters
 ```
 
 ## Usage

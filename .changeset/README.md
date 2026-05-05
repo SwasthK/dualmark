@@ -5,11 +5,11 @@ This folder is used by [Changesets](https://github.com/changesets/changesets) to
 To add a changeset:
 
 ```bash
-pnpm changeset
+bun run changeset
 ```
 
 To version packages (run during release):
 
 ```bash
-pnpm version-packages
+bun run version-packages
 ```

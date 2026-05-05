@@ -11,10 +11,10 @@ The fastest path to a fully dual-marked site is the Astro integration.
 
 ## Install
 
-<Tabs items={["pnpm", "npm", "yarn", "bun"]}>
-<Tab value="pnpm">
+<Tabs items={["bun", "npm", "yarn"]}>
+<Tab value="bun">
 ```bash
-pnpm add @dualmark/astro @dualmark/core @dualmark/converters
+bun add @dualmark/astro @dualmark/core @dualmark/converters
 ```
 </Tab>
 <Tab value="npm">
@@ -25,11 +25,6 @@ npm install @dualmark/astro @dualmark/core @dualmark/converters
 <Tab value="yarn">
 ```bash
 yarn add @dualmark/astro @dualmark/core @dualmark/converters
-```
-</Tab>
-<Tab value="bun">
-```bash
-bun add @dualmark/astro @dualmark/core @dualmark/converters
 ```
 </Tab>
 </Tabs>
@@ -67,7 +62,7 @@ export default defineConfig({
 ## Build
 
 ```bash
-pnpm build
+bun run build
 ```
 
 Every blog post now has a markdown twin at `/blog/<slug>.md`, an `llms.txt` is auto-generated, and an Astro middleware injects the `Link: <…>; rel="alternate"; type="text/markdown"` header on every HTML response.
@@ -79,7 +74,7 @@ Every blog post now has a markdown twin at `/blog/<slug>.md`, an `llms.txt` is a
 ## Verify
 
 ```bash
-pnpm dev
+bun run dev
 # in another terminal:
 npx @dualmark/cli verify http://localhost:4321/blog/your-post
 ```

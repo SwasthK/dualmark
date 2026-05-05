@@ -6,6 +6,7 @@ build/
 .astro/
 .wrangler/
 coverage/
-pnpm-lock.yaml
+bun.lock
+bun.lockb
 *.tsbuildinfo
 .changeset/*.md

@@ -5,10 +5,10 @@ Fumadocs-powered documentation site for Dualmark.
 ## Run
 
 ```bash
-pnpm install
-pnpm dev      # http://localhost:4000
-pnpm build
-pnpm start
+bun install
+bun run dev      # http://localhost:4000
+bun run build
+bun run start
 ```
 
 ## Structure
@@ -28,7 +28,7 @@ apps/docs/
 └── scripts/sync-spec.mjs  Pulls /spec/*.md into content/docs/spec/*.mdx
 ```
 
-The spec lives at `/spec/*.md` (single source of truth). `pnpm sync-spec` (auto-run by `dev` and `build`) regenerates the MDX mirror.
+The spec lives at `/spec/*.md` (single source of truth). `bun run sync-spec` (auto-run by `dev` and `build`) regenerates the MDX mirror.
 
 ## License
 

@@ -5,9 +5,9 @@
 ## Install
 
 ```bash
-pnpm add -D @dualmark/cli
+bun add -d @dualmark/cli
 # or run directly:
-pnpm dlx @dualmark/cli verify https://example.com/blog/hello
+bunx @dualmark/cli verify https://example.com/blog/hello
 ```
 
 ## Usage

@@ -5,10 +5,10 @@ Minimal Astro 5 site demonstrating the `@dualmark/astro` integration.
 ## Run
 
 ```bash
-pnpm install
-pnpm dev              # http://localhost:4321 — full Dualmark headers (recommended for verify)
-pnpm build            # generates dist/ with html + .md twins (static)
-pnpm preview          # serves static dist/ — note: response headers are NOT preserved by static serving
+bun install
+bun run dev              # http://localhost:4321 — full Dualmark headers (recommended for verify)
+bun run build            # generates dist/ with html + .md twins (static)
+bun run preview          # serves static dist/ — note: response headers are NOT preserved by static serving
 ```
 
 Visit `http://localhost:4321/blog/hello-world` (HTML) or `http://localhost:4321/blog/hello-world.md` (markdown).
@@ -17,12 +17,12 @@ Visit `http://localhost:4321/blog/hello-world` (HTML) or `http://localhost:4321/
 
 In one terminal:
 ```bash
-pnpm dev
+bun run dev
 ```
 
 In another:
 ```bash
-pnpm verify
+bun run verify
 # or directly:
 npx @dualmark/cli verify http://localhost:4321/blog/hello-world
 ```

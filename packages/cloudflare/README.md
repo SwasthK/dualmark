@@ -5,7 +5,7 @@ Cloudflare Workers edge adapter for the Dualmark AEO framework. Wraps any upstre
 ## Install
 
 ```bash
-pnpm add @dualmark/cloudflare @dualmark/core
+bun add @dualmark/cloudflare @dualmark/core
 ```
 
 ## Usage

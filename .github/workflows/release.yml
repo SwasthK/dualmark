@@ -48,13 +48,13 @@ jobs:
           registry-url: https://registry.npmjs.org
 
       - name: Build packages
-        run: pnpm turbo run build --filter='./packages/*'
+        run: bunx turbo run build --filter='./packages/*'
 
       - name: Run tests (gate release)
-        run: pnpm turbo run test --filter='./packages/*'
+        run: bunx turbo run test --filter='./packages/*'
 
       - name: Typecheck (gate release)
-        run: pnpm turbo run typecheck --filter='./packages/*'
+        run: bunx turbo run typecheck --filter='./packages/*'
 
       - name: Verify tag matches package versions
         run: |
@@ -78,7 +78,7 @@ jobs:
           fi
 
       - name: Publish to npm
-        run: pnpm changeset publish
+        run: bun run changeset publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

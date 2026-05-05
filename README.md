@@ -9,8 +9,8 @@ That's not a content problem. It's an **infrastructure problem**. AI search engi
 **Dualmark gives every page a markdown twin.** Same URL. Two formats. Picked by HTTP content negotiation. Drop it into your Astro/Next.js/Cloudflare stack in 30 seconds. Score it with `dualmark verify`.
 
 ```diff
-- pnpm add @next-seo/some-meta-tag-thing
-+ pnpm add @dualmark/astro
+- npm install @next-seo/some-meta-tag-thing
++ bun add @dualmark/astro
 ```
 
 [Quickstart](#quickstart) · [Why](#why-marketing-teams-need-this) · [Examples](./examples) · [Spec](./spec) · [Docs](https://dualmark.dev)
@@ -22,7 +22,7 @@ That's not a content problem. It's an **infrastructure problem**. AI search engi
 ### Astro (30 seconds)
 
 ```bash
-pnpm add @dualmark/astro
+bun add @dualmark/astro
 ```
 
 ```ts
@@ -46,7 +46,7 @@ export default defineConfig({
 ```
 
 ```bash
-pnpm build && pnpm dualmark verify https://localhost:4321/blog/your-post
+bun run build && bunx dualmark verify https://localhost:4321/blog/your-post
 # → Score 80/80 ✓
 ```
 
@@ -223,8 +223,8 @@ Plus:
 | `/play` route | Live at dualmark.dev/play, integrated into the docs app |
 
 ```bash
-pnpm install
-pnpm build && pnpm test && pnpm typecheck   # 253 tests across 5 packages
+bun install
+bun run build && bun run test && bun run typecheck   # 253 tests across 5 packages
 ```
 
 ---
@@ -252,10 +252,10 @@ We're early. Issues, PRs, and "I tried it on $framework and it broke" reports ar
 - The AEO Spec is authoritative — if you implement it elsewhere (in any language), we want to link to your implementation.
 
 ```bash
-pnpm install
-pnpm build   # turbo-orchestrated build
-pnpm test    # vitest across all packages
-pnpm typecheck
+bun install
+bun run build   # turbo-orchestrated build
+bun run test    # vitest across all packages
+bun run typecheck
 ```
 
 ## License

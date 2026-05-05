@@ -29,13 +29,13 @@ jobs:
         uses: ./.github/actions/setup
 
       - name: Build all packages
-        run: pnpm build
+        run: bun run build
 
       - name: Run tests
-        run: pnpm test
+        run: bun run test
 
       - name: Typecheck
-        run: pnpm typecheck
+        run: bun run typecheck
 
       - name: CLI smoke test
         run: |
@@ -45,9 +45,9 @@ jobs:
       - name: Verify spec docs are in sync
         working-directory: apps/docs
         run: |
-          pnpm sync-spec
+          bun run sync-spec
           if ! git diff --quiet content/docs/spec/; then
-            echo "::error::apps/docs/content/docs/spec/ is out of sync with /spec/. Run 'pnpm --filter dualmark-docs sync-spec' and commit." >&2
+            echo "::error::apps/docs/content/docs/spec/ is out of sync with /spec/. Run 'bun run --filter dualmark-docs sync-spec' and commit." >&2
             git diff --stat content/docs/spec/ >&2
             exit 1
           fi
