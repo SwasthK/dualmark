@@ -1,12 +1,30 @@
 import "./globals.css";
 import { RootProvider } from "fumadocs-ui/provider";
-import { Geist, JetBrains_Mono } from "next/font/google";
+import {
+  Darker_Grotesque,
+  Geist,
+  Inter,
+  JetBrains_Mono,
+} from "next/font/google";
 import type { ReactNode } from "react";
 import { UnifiedNav } from "./_components/unified-nav";
 
 const geistSans = Geist({
   subsets: ["latin"],
   variable: "--font-geist-sans",
+  display: "swap",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const darkerGrotesque = Darker_Grotesque({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-darker-grotesque",
   display: "swap",
 });
 
@@ -41,7 +59,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html
       lang="en"
-      className={`dark ${geistSans.variable} ${jetbrainsMono.variable}`}
+      className={`dark ${geistSans.variable} ${inter.variable} ${darkerGrotesque.variable} ${jetbrainsMono.variable}`}
       suppressHydrationWarning
     >
       <body className="min-h-screen bg-[var(--color-bg)] text-[var(--color-fg)] antialiased">

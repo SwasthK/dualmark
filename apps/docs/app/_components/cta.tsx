@@ -7,7 +7,7 @@ export function CTA() {
     <Section className="pt-12">
       <div className="relative overflow-hidden rounded-[var(--radius-card)] border border-[var(--color-border)] bg-[var(--color-bg-elev-1)]/40 px-6 py-16 text-center md:px-12 md:py-24">
         <div className="absolute inset-0 bg-dots opacity-40" />
-        <div className="absolute left-1/2 top-1/2 -z-10 size-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(ellipse_at_center,oklch(0.78_0.14_195/0.15),transparent_60%)]" />
+        <div className="absolute left-1/2 top-1/2 -z-10 size-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(198,254,30,0.18),transparent_60%)]" />
 
         <div className="relative mx-auto flex max-w-2xl flex-col items-center gap-6">
           <span className="inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-bg)]/80 px-3 py-1 font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--color-accent)] backdrop-blur">
@@ -17,7 +17,7 @@ export function CTA() {
 
           <h2 className="text-balance text-4xl font-semibold tracking-tight text-[var(--color-fg)] md:text-6xl">
             Make every page{" "}
-            <span className="bg-gradient-to-r from-[var(--color-accent-strong)] to-[oklch(0.78_0.14_280)] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#e8ffa8] via-[#c6fe1e] to-[#9ee847] bg-clip-text text-transparent">
               dual-marked.
             </span>
           </h2>
@@ -30,7 +30,7 @@ export function CTA() {
           <div className="mt-2 flex flex-col items-center gap-3 sm:flex-row">
             <Link
               href="/docs/quickstart"
-              className="group inline-flex h-12 items-center gap-2 rounded-lg bg-[var(--color-fg)] px-7 font-medium text-[var(--color-bg)] transition-all hover:bg-[var(--color-accent-strong)]"
+              className="group inline-flex h-12 items-center gap-2 rounded-lg bg-[var(--color-accent)] px-7 font-semibold text-[var(--color-accent-ink)] transition-all hover:bg-[var(--color-accent-strong)]"
             >
               Quickstart
               <span aria-hidden className="transition-transform group-hover:translate-x-0.5">
@@ -95,7 +95,7 @@ function Footer() {
           links={[
             { href: "/docs/quickstart", label: "Quickstart" },
             { href: "/docs/integrations/astro", label: "Astro" },
-            { href: "/docs/integrations/cloudflare", label: "Cloudflare" },
+            { href: "/docs/integrations/cloudflare-workers", label: "Cloudflare" },
             { href: "/docs/integrations/nextjs", label: "Next.js" },
             { href: "/play", label: "Playground" },
           ]}
@@ -104,7 +104,7 @@ function Footer() {
           title="Resources"
           links={[
             { href: "/docs/spec/overview", label: "AEO Spec" },
-            { href: "/docs/conformance", label: "Conformance" },
+            { href: "/docs/conformance/cli", label: "Conformance" },
             { href: "https://github.com/dodopayments/dualmark", label: "GitHub" },
             {
               href: "https://github.com/dodopayments/dualmark/blob/main/LICENSE",

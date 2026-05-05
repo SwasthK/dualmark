@@ -23,7 +23,7 @@ export function Hero() {
 
         <h1 className="max-w-4xl text-balance text-center text-5xl font-semibold tracking-tight text-[var(--color-fg)] md:text-7xl">
           AEO infrastructure{" "}
-          <span className="bg-gradient-to-r from-[var(--color-accent-strong)] via-[var(--color-accent)] to-[oklch(0.78_0.14_280)] bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-[#e8ffa8] via-[#c6fe1e] to-[#9ee847] bg-clip-text text-transparent">
             built for developers.
           </span>
         </h1>
@@ -37,7 +37,7 @@ export function Hero() {
         <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row">
           <Link
             href="/docs"
-            className="group inline-flex h-11 items-center gap-2 rounded-lg bg-[var(--color-fg)] px-6 font-medium text-[var(--color-bg)] transition-all hover:bg-[var(--color-accent-strong)] hover:text-[var(--color-bg)]"
+            className="group inline-flex h-11 items-center gap-2 rounded-lg bg-[var(--color-accent)] px-6 font-semibold text-[var(--color-accent-ink)] transition-all hover:bg-[var(--color-accent-strong)]"
           >
             Read the docs
             <span aria-hidden className="transition-transform group-hover:translate-x-0.5">

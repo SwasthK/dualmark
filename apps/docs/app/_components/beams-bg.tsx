@@ -18,7 +18,7 @@ export function BeamsBackground() {
           beamWidth={2.4}
           beamHeight={22}
           beamNumber={14}
-          lightColor="#7dd3fc"
+          lightColor="#c6fe1e"
           speed={1.6}
           noiseIntensity={1.4}
           scale={0.18}

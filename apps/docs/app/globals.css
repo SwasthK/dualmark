@@ -4,7 +4,8 @@
 
 @theme {
   /* ---------- Fonts ---------- */
-  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-darker-grotesque), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-jetbrains-mono), ui-monospace, "JetBrains Mono", "Fira Code", monospace;
 
   /* ---------- Surface scale (dark) ---------- */
@@ -22,10 +23,11 @@
   --color-border: oklch(1 0 0 / 0.08);
   --color-border-strong: oklch(1 0 0 / 0.14);
 
-  /* ---------- Accent (cyan-leaning) ---------- */
-  --color-accent: oklch(0.78 0.14 195);
-  --color-accent-strong: oklch(0.85 0.16 195);
-  --color-accent-soft: oklch(0.78 0.14 195 / 0.12);
+  /* ---------- Accent (electric lime) ---------- */
+  --color-accent: #c6fe1e;
+  --color-accent-strong: #d6ff5c;
+  --color-accent-soft: rgba(198, 254, 30, 0.14);
+  --color-accent-ink: #0d0d0d;
 
   /* ---------- Semantic ---------- */
   --color-success: oklch(0.78 0.18 150);
@@ -123,4 +125,138 @@ body {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-fg-subtle);
+}
+
+/* ============================================================
+   Fumadocs theme alignment with brand
+   ============================================================ */
+
+.dark {
+  --color-fd-background: var(--color-bg);
+  --color-fd-foreground: var(--color-fg);
+  --color-fd-muted: var(--color-bg-elev-1);
+  --color-fd-muted-foreground: var(--color-fg-muted);
+  --color-fd-popover: var(--color-bg-elev-2);
+  --color-fd-popover-foreground: var(--color-fg);
+  --color-fd-card: var(--color-bg-elev-1);
+  --color-fd-card-foreground: var(--color-fg);
+  --color-fd-border: var(--color-border);
+  --color-fd-primary: var(--color-accent);
+  --color-fd-primary-foreground: var(--color-bg);
+  --color-fd-secondary: var(--color-bg-elev-2);
+  --color-fd-secondary-foreground: var(--color-fg);
+  --color-fd-accent: var(--color-bg-elev-2);
+  --color-fd-accent-foreground: var(--color-fg);
+  --color-fd-ring: var(--color-accent);
+}
+
+.dark #nd-sidebar {
+  --color-fd-muted: var(--color-bg-elev-1);
+  --color-fd-secondary: var(--color-bg-elev-2);
+  --color-fd-muted-foreground: var(--color-fg-muted);
+}
+
+#nd-sidebar a[data-active="true"],
+#nd-sidebar [data-active="true"] {
+  color: var(--color-accent-strong) !important;
+  background: var(--color-accent-soft) !important;
+}
+
+#nd-sidebar [data-separator] {
+  color: var(--color-fg-subtle) !important;
+  font-family: var(--font-mono);
+  font-size: 11px !important;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding-top: 1.25rem;
+  padding-bottom: 0.25rem;
+}
+
+#nd-toc a[data-active="true"],
+[data-fd-toc] a[data-active="true"] {
+  color: var(--color-accent) !important;
+  border-left-color: var(--color-accent) !important;
+}
+
+[data-fd-search-trigger] {
+  background: var(--color-bg-elev-1) !important;
+  border-color: var(--color-border) !important;
+}
+
+[data-fd-search-trigger]:hover {
+  border-color: var(--color-border-strong) !important;
+}
+
+article h1,
+article h2,
+article h3,
+article h4 {
+  letter-spacing: -0.02em;
+  scroll-margin-top: 6rem;
+}
+
+article h2 {
+  font-size: 1.625rem !important;
+  margin-top: 2.75rem !important;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+article h3 {
+  font-size: 1.25rem !important;
+  margin-top: 2rem !important;
+}
+
+article p code,
+article li code,
+article td code {
+  background: var(--color-bg-elev-2) !important;
+  border: 1px solid var(--color-border);
+  padding: 0.1rem 0.4rem;
+  border-radius: 0.25rem;
+  font-size: 0.85em;
+  color: var(--color-accent-strong);
+}
+
+article pre {
+  border: 1px solid var(--color-border) !important;
+  background: var(--color-bg-elev-1) !important;
+  border-radius: 0.5rem !important;
+}
+
+article a:not([data-card]):not([data-active]) {
+  color: var(--color-accent) !important;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--color-accent-soft);
+  transition: text-decoration-color 200ms;
+}
+
+article a:not([data-card]):not([data-active]):hover {
+  text-decoration-color: var(--color-accent);
+}
+
+article table {
+  font-size: 0.875rem;
+}
+
+article table thead {
+  background: var(--color-bg-elev-2);
+}
+
+article table th {
+  font-family: var(--font-mono);
+  font-size: 11px !important;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-fg-muted) !important;
+}
+
+article blockquote {
+  border-left: 2px solid var(--color-accent) !important;
+  background: var(--color-accent-soft);
+  padding: 0.75rem 1rem !important;
+  border-radius: 0 0.375rem 0.375rem 0;
+  font-style: normal !important;
+  color: var(--color-fg-muted) !important;
 }
