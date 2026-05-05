@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.base.json",
+  "include": [],
+  "references": [
+    { "path": "./packages/core" },
+    { "path": "./packages/converters" },
+    { "path": "./packages/cloudflare" },
+    { "path": "./packages/astro" },
+    { "path": "./packages/cli" }
+  ]
+}

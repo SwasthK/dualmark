@@ -1,0 +1,43 @@
+{
+  "name": "dualmark-monorepo",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Open-source AEO (Answer Engine Optimization) infrastructure — every page, dual-marked.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dodopayments/dualmark.git"
+  },
+  "homepage": "https://dualmark.dev",
+  "packageManager": "pnpm@10.6.2",
+  "engines": {
+    "node": ">=18.18.0"
+  },
+  "scripts": {
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "typecheck": "turbo run typecheck",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md,mdx}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md,mdx}\"",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "turbo run build --filter=./packages/* && changeset publish",
+    "clean": "turbo run clean && rm -rf node_modules"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.27.10",
+    "@types/node": "^22.10.0",
+    "@vitest/coverage-v8": "^2.1.8",
+    "prettier": "^3.4.2",
+    "tsup": "^8.3.5",
+    "turbo": "^2.3.3",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  },
+  "pnpm": {
+    "peerDependencyRules": {
+      "ignoreMissing": ["react", "react-dom"]
+    }
+  }
+}
