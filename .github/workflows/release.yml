@@ -77,11 +77,42 @@ jobs:
             exit 1
           fi
 
+      - name: Configure npm authentication
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
+          echo "registry=https://registry.npmjs.org/" >> ~/.npmrc
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
       - name: Publish to npm
-        # Provenance disabled because the repo is INTERNAL.
-        # npm provenance requires a PUBLIC GitHub repo to verify build source.
-        # Re-enable by setting NPM_CONFIG_PROVENANCE: true once the repo is public.
-        run: bun run changeset publish
+        # Uses `bun publish` per package instead of `changeset publish` because
+        # changesets delegates to `npm publish` (which does NOT rewrite
+        # workspace:* dependencies). bun publish DOES rewrite workspace:* to
+        # the actual version at pack time, producing valid tarballs that
+        # external consumers can install. Provenance disabled because the
+        # repo is INTERNAL — flip repo public + add `--provenance` here to
+        # re-enable.
+        run: |
+          set -euo pipefail
+          published_count=0
+          for pkg_dir in packages/*; do
+            if [ ! -f "$pkg_dir/package.json" ]; then continue; fi
+            pkg_name=$(node -p "require('./$pkg_dir/package.json').name")
+            pkg_version=$(node -p "require('./$pkg_dir/package.json').version")
+            published=$(npm view "$pkg_name@$pkg_version" version --silent 2>/dev/null || true)
+            if [ -n "$published" ]; then
+              echo "::group::$pkg_name@$pkg_version (skip — already on npm)"
+              echo "  registry reports version: $published"
+              echo "::endgroup::"
+              continue
+            fi
+            echo "::group::Publishing $pkg_name@$pkg_version"
+            (cd "$pkg_dir" && bun publish --access public --tag latest)
+            echo "::endgroup::"
+            published_count=$((published_count + 1))
+          done
+          echo ""
+          echo "Published $published_count package(s) to npm at version matching tag."
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
