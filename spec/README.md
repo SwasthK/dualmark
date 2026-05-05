@@ -1,12 +1,42 @@
 # AEO Specification v1.0
 
-**Status:** Draft (May 2026)
-**Editors:** The Dualmark Working Group
+**Status:** Proposed convention (May 2026)
+**Editors:** The Dualmark Working Group (Dodo Payments)
 **Repository:** https://github.com/dodopayments/dualmark
 
 This specification defines a set of HTTP conventions for serving content to AI agents (LLM-powered search engines, training crawlers, and user-action retrieval bots) alongside conventional HTML for human browsers.
 
 The specification is **independent of any framework**. Anyone can implement it in any language. The reference implementation is the [`@dualmark/*`](../packages) packages.
+
+## 0. Status of this Document
+
+This document is a **proposed convention**, not an official Internet Standard. It has not been reviewed or adopted by the IETF, W3C, WHATWG, or any other recognized standards body. There is no AI/AEO working group at the time of writing.
+
+**What is universally accepted** (the foundations this spec builds on):
+
+- HTTP content negotiation via the `Accept` header — [RFC 7231 §5.3.2](https://www.rfc-editor.org/rfc/rfc7231#section-5.3.2), an IETF Internet Standard
+- HTTP `Vary` and `Link` headers — [RFC 7234](https://www.rfc-editor.org/rfc/rfc7234), [RFC 8288](https://www.rfc-editor.org/rfc/rfc8288), IETF Standards Track
+- The `text/markdown` media type — [RFC 7763](https://www.rfc-editor.org/rfc/rfc7763), IETF Informational
+- `noindex` directive in `X-Robots-Tag` — de-facto since Google introduced it in 2007
+
+**What this spec adds on top** (not standardized anywhere):
+
+- The `<page>.md` twin URL convention (a pattern several sites have independently adopted; not a registered URI scheme)
+- The `X-Markdown-Tokens`, `X-AEO-Version` response headers (custom, prefixed `X-` per [RFC 6648](https://www.rfc-editor.org/rfc/rfc6648) deprecation guidance — these may move to standard headers in a future revision)
+- The conformance scoring model (Basic / Standard / Advanced thresholds — purely this spec's editorial choice)
+- The AI Agent Registry (we curate it; vendors publish their own UA patterns separately and we aggregate)
+
+**Sibling proposals in the same problem space:**
+
+- [llms.txt](https://llmstxt.org/) — Jeremy Howard / Answer.AI, September 2024. Proposes a single `/llms.txt` index file. Adopted by Mintlify, Anthropic, ~5,000 sites. We extend rather than replace this proposal — see [llms-txt-extensions.md](./llms-txt-extensions.md).
+- Various vendor-specific markdown export patterns (Anthropic docs, Cloudflare docs, Mintlify-hosted sites). Each implements roughly the same idea with subtly different conventions.
+
+**Path forward.** We expect this space will eventually be standardized — most likely via an IETF working group on AI-agent content negotiation, or as a W3C community group. When (or if) an official spec emerges, this document will either:
+
+1. Map cleanly onto the official spec (likely, since we built on RFC primitives), or
+2. Be marked Deprecated with a migration guide.
+
+In the meantime, implementing this spec gets you working AEO infrastructure today, with strong forward-compatibility because the foundation (RFC 7231 content negotiation) will not change.
 
 ## 1. Scope
 

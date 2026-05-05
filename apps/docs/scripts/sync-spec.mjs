@@ -8,7 +8,7 @@ const specDir = join(here, "..", "..", "..", "spec");
 const outDir = join(here, "..", "content", "docs", "spec");
 
 const FILE_MAP = {
-  "README.md": { slug: "overview", title: "Overview", description: "AEO Specification v1.0 — scope, terminology, and section index." },
+  "README.md": { slug: "overview", title: "Overview", description: "AEO Specification v1.0 — proposed convention. Scope, terminology, status, section index." },
   "content-negotiation.md": { slug: "content-negotiation", title: "Content negotiation", description: "RFC 7231 §5.3.2 — how Dualmark picks HTML vs markdown." },
   "headers.md": { slug: "headers", title: "Response headers", description: "Required and recommended response headers for markdown twins." },
   "ai-bot-detection.md": { slug: "ai-bot-detection", title: "AI bot registry", description: "The canonical list of AI crawler User-Agent patterns." },
