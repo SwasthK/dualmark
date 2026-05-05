@@ -133,6 +133,23 @@ export function createAEOWorker<Env extends MinimalEnv = MinimalEnv>(
         return new Response(null, { status: 301, headers: { Location: target.href } });
       }
 
+      if (pathname.endsWith(".md") && !shouldSkip(pathname, skipPrefixes, skipExtensions)) {
+        let assetResponse: Response | null = null;
+        try {
+          assetResponse = await env.ASSETS.fetch(new URL(pathname, url.origin));
+        } catch {
+          assetResponse = null;
+        }
+        if (assetResponse && assetResponse.ok) {
+          const body = await assetResponse.text();
+          return new Response(body, {
+            status: 200,
+            headers: buildMarkdownHeaders(body, cacheControl),
+          });
+        }
+        return assetResponse ?? new Response("Not Found", { status: 404 });
+      }
+
       if (!pathname.endsWith(".md") && !shouldSkip(pathname, skipPrefixes, skipExtensions)) {
         const ua = request.headers.get("user-agent") ?? "";
         const accept = request.headers.get("accept") ?? "";

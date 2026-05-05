@@ -159,6 +159,31 @@ describe("createAEOWorker — markdown serving", () => {
     expect(res.status).toBe(200);
     expect(await res.text()).toBe("# Home\n\nWelcome.");
   });
+
+  it("decorates direct .md requests with full AEO headers from ASSETS", async () => {
+    const worker = createAEOWorker({
+      upstream: makeUpstream(() => new Response("should-not-be-called", { status: 500 })),
+    });
+    const req = new Request("https://acme.test/blog/post-1.md");
+    const res = await worker.fetch(req, env, makeCtx());
+    expect(res.status).toBe(200);
+    expect(res.headers.get("Content-Type")).toBe("text/markdown; charset=utf-8");
+    expect(res.headers.get("X-Markdown-Tokens")).toMatch(/^\d+$/);
+    expect(res.headers.get("X-Robots-Tag")).toBe("noindex");
+    expect(res.headers.get("Vary")).toBe("Accept");
+    expect(res.headers.get("X-AEO-Version")).toBe("1.0");
+    expect(res.headers.get("X-Content-Type-Options")).toBe("nosniff");
+    expect(await res.text()).toBe("# Post 1\n\nBody.");
+  });
+
+  it("returns 404 for direct .md request when asset missing", async () => {
+    const worker = createAEOWorker({
+      upstream: makeUpstream(() => new Response("html")),
+    });
+    const req = new Request("https://acme.test/missing.md");
+    const res = await worker.fetch(req, env, makeCtx());
+    expect(res.status).toBe(404);
+  });
 });
 
 describe("createAEOWorker — trailing slash", () => {
