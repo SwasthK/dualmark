@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dualmark Playground — Accept header tester</title>
+    <meta name="description" content="Try the Dualmark content negotiation algorithm against any Accept header and User-Agent." />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>Dualmark Playground</h1>
+        <p>
+          Paste an <code>Accept</code> header and <code>User-Agent</code> below.
+          See how <a href="https://github.com/dodopayments/dualmark"><code>@dualmark/core</code></a>
+          would negotiate the response format and detect AI bots — same logic that runs on the edge.
+        </p>
+      </header>
+
+      <section class="grid">
+        <label>
+          <span>Accept header</span>
+          <textarea id="accept" rows="3" placeholder="text/markdown, text/html;q=0.9">text/html, application/xhtml+xml, application/xml;q=0.9, */*;q=0.8</textarea>
+        </label>
+
+        <label>
+          <span>User-Agent</span>
+          <textarea id="ua" rows="3" placeholder="GPTBot/1.0">Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36</textarea>
+        </label>
+      </section>
+
+      <section class="presets">
+        <span>Presets:</span>
+        <button data-preset="browser">Browser</button>
+        <button data-preset="gptbot">GPTBot</button>
+        <button data-preset="claudebot">ClaudeBot</button>
+        <button data-preset="perplexity">PerplexityBot</button>
+        <button data-preset="md-only">Accept: text/markdown</button>
+        <button data-preset="json-only">Accept: application/json</button>
+      </section>
+
+      <section class="result" id="result"></section>
+
+      <footer>
+        <p>
+          All computation runs locally in your browser using
+          <a href="https://github.com/dodopayments/dualmark/tree/main/packages/core"><code>@dualmark/core</code></a>'s
+          <code>negotiateFormat</code>, <code>parseAcceptHeader</code>, and <code>detectAIBot</code>.
+          No requests are made.
+        </p>
+      </footer>
+    </main>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
