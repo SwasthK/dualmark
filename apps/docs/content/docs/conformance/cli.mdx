@@ -1,0 +1,64 @@
+---
+title: The verify CLI
+description: Score any URL against the AEO Spec.
+---
+
+```bash
+npx @dualmark/cli verify https://example.com/blog/your-post
+```
+
+## Usage
+
+```
+dualmark verify <url> [options]
+
+Options:
+  --json                Output a machine-readable JSON report
+  --skip-negotiation    Skip negotiation checks (use for static-only sites)
+  --timeout <ms>        Per-request timeout (default: 10000)
+  --help, -h            Show help
+```
+
+## Exit codes
+
+| Code | Meaning |
+| --- | --- |
+| `0` | All required checks passed |
+| `1` | One or more required checks failed |
+| `2` | CLI error (network, invalid URL, etc.) |
+
+## Programmatic API
+
+```ts
+import { verifyUrl, formatTextReport } from "@dualmark/cli";
+
+const result = await verifyUrl("https://example.com/blog/post");
+console.log(formatTextReport(result));
+console.log("score:", result.score, "/", result.maxScore);
+```
+
+## Sample output
+
+```
+Dualmark Conformance Report
+URL:         http://example.com/blog/edge-aeo
+Markdown:    http://example.com/blog/edge-aeo.md
+Score:       125/125
+Duration:    107ms
+
+Passed:
+  [+20] md.fetch         — Markdown twin URL is reachable and returns 2xx
+  [+10] md.contentType   — Content-Type is text/markdown; charset=utf-8
+  [+10] md.tokensHeader  — X-Markdown-Tokens header is present and a positive integer
+  [+10] md.noindex       — X-Robots-Tag includes noindex
+  [+10] md.vary          — Vary header includes Accept
+  [+10] md.body          — Body is non-empty markdown
+  [+ 5] md.aeoVersion    — X-AEO-Version header advertises spec version
+  [+ 5] md.nosniff       — X-Content-Type-Options is nosniff
+  [+ 5] html.reachable   — HTML URL is reachable
+  [+10] html.linkAlternate — HTML response advertises markdown twin via Link rel=alternate
+  [+ 5] html.vary        — HTML response Vary header includes Accept
+  [+10] negotiation.botUa — GPTBot UA receives text/markdown response
+  [+10] negotiation.acceptHeader — Accept: text/markdown receives text/markdown response
+  [+ 5] negotiation.notAcceptable — Accept that excludes html+markdown returns 406
+```

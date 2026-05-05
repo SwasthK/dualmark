@@ -1,0 +1,72 @@
+---
+title: "@dualmark/cli"
+description: "`dualmark verify <url>` — conformance test runner."
+---
+
+```bash
+pnpm add -g @dualmark/cli
+# or run ad-hoc:
+npx @dualmark/cli verify https://example.com
+```
+
+## CLI
+
+```
+dualmark verify <url> [options]
+
+Options:
+  --json                Output a machine-readable JSON report
+  --skip-negotiation    Skip negotiation checks (use for static-only sites)
+  --timeout <ms>        Per-request timeout (default: 10000)
+  --help, -h            Show help
+```
+
+See [conformance/cli](/docs/conformance/cli) for sample output.
+
+## Programmatic API
+
+```ts
+import { verifyUrl, formatTextReport } from "@dualmark/cli";
+
+const result = await verifyUrl("https://example.com/blog/post", {
+  skipNegotiation: false,
+  timeoutMs: 10_000,
+});
+
+console.log(formatTextReport(result));
+
+if (result.failed.some((c) => c.required)) {
+  process.exit(1);
+}
+```
+
+## `VerifyResult` shape
+
+```ts
+interface VerifyResult {
+  url: string;          // input URL (HTML)
+  mdUrl: string;        // derived markdown URL
+  score: number;        // points earned
+  maxScore: number;     // total possible
+  durationMs: number;
+  passed: CheckResult[];
+  failed: CheckResult[];
+  skipped: CheckResult[];
+}
+
+interface CheckResult {
+  id: string;           // e.g. "md.fetch"
+  weight: number;
+  required: boolean;
+  description: string;
+  reason?: string;      // present on failures
+}
+```
+
+## Exit codes
+
+| Code | Meaning |
+| --- | --- |
+| `0` | All required checks passed |
+| `1` | One or more required checks failed |
+| `2` | CLI error (network, invalid URL, etc.) |

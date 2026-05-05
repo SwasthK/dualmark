@@ -1,0 +1,110 @@
+---
+title: Astro
+description: Add Dualmark to an Astro 5 site with one integration.
+---
+
+## Install
+
+```bash
+pnpm add @dualmark/astro @dualmark/core @dualmark/converters
+```
+
+## Minimal config
+
+```js
+// astro.config.mjs
+import { defineConfig } from "astro/config";
+import dualmark from "@dualmark/astro";
+
+export default defineConfig({
+  site: "https://example.com",
+  integrations: [
+    dualmark({
+      siteUrl: "https://example.com",
+      collections: {
+        blog: { converter: "blog" },
+      },
+      llmsTxt: { enabled: true },
+    }),
+  ],
+});
+```
+
+This auto-generates:
+
+- `/blog/<slug>.md` for every entry in your `blog` collection
+- `/blog.md` listing
+- `/llms.txt`
+- A middleware that adds `Link rel="alternate"` to every HTML response
+
+## Full config
+
+```js
+dualmark({
+  siteUrl: "https://example.com",
+
+  collections: {
+    blog: {
+      converter: "blog",
+      slugStrategy: "single",
+      listingMetadata: {
+        title: "Blog",
+        description: "All blog posts.",
+      },
+    },
+    glossary: { converter: "glossary" },
+    docs: {
+      converter: (entry) => `# ${entry.data.title}\n\n${entry.body}`,
+    },
+  },
+
+  staticPages: [
+    { pattern: "/", render: () => "# Home\n\nWelcome." },
+    { pattern: "/about", render: () => "# About" },
+  ],
+
+  parameterizedRoutes: [
+    {
+      pattern: "/tax/[country]",
+      getStaticPaths: async () => [{ params: { country: "us" } }, { params: { country: "uk" } }],
+      render: ({ country }) => `# Tax: ${country.toUpperCase()}\n\n...`,
+    },
+  ],
+
+  llmsTxt: {
+    enabled: true,
+    brandName: "Acme",
+    description: "Acme's docs and blog.",
+    sections: [
+      {
+        title: "Pages",
+        links: [
+          { title: "Home", href: "https://example.com/" },
+          { title: "Blog", href: "https://example.com/blog" },
+        ],
+      },
+    ],
+  },
+
+  middleware: { injectLinkHeader: true },
+
+  cacheControl: "public, max-age=3600",
+  noindex: true,
+});
+```
+
+## Available converters
+
+`converter: "blog" | "glossary" | "case-study" | "legal" | "compare" | "tool" | "video" | "tax" | "country" | "payment-method" | "currency" | "product"` — see [@dualmark/converters](/docs/packages/converters).
+
+You can also pass a custom function: `converter: (entry) => string`.
+
+## Verify
+
+```bash
+pnpm dev
+# new terminal:
+npx @dualmark/cli verify http://localhost:4321/blog/your-post
+```
+
+The example at `examples/astro-blog` scores **80/80** with `--skip-negotiation` under `astro dev`.

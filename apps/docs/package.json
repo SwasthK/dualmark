@@ -1,0 +1,28 @@
+{
+  "name": "dualmark-docs",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "sync-spec": "node scripts/sync-spec.mjs",
+    "dev": "pnpm sync-spec && next dev --port 4000",
+    "build": "pnpm sync-spec && next build",
+    "start": "next start --port 4000",
+    "postinstall": "fumadocs-mdx"
+  },
+  "dependencies": {
+    "fumadocs-core": "15.8.5",
+    "fumadocs-mdx": "12.0.3",
+    "fumadocs-ui": "15.8.5",
+    "next": "^15.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/mdx": "^2.0.13",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "typescript": "^5.5.0"
+  }
+}

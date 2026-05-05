@@ -1,0 +1,120 @@
+---
+title: Next.js
+description: Wire @dualmark/core into Next.js 15 App Router manually.
+---
+
+There is no dedicated `@dualmark/nextjs` adapter package yet — but `@dualmark/core` is framework-agnostic and plugs straight into Next.js's App Router via `middleware.ts` and route handlers.
+
+The full working example lives at `examples/nextjs-app-router` and scores **120/125** under `next dev`.
+
+## Architecture
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│ middleware.ts                                               │
+│   - if path ends in .md → rewrite to /md/<path-no-ext>     │
+│   - if AI bot UA OR Accept: text/markdown                   │
+│       → rewrite to /md/<path>                               │
+│   - if Accept rules out html+md → 406                       │
+│   - else (HTML) → next() + Link rel=alternate header        │
+└─────────────────────────────────────────────────────────────┘
+
+app/
+├── page.tsx                  → /              (HTML)
+├── posts/
+│   ├── page.tsx              → /posts         (HTML)
+│   └── [slug]/page.tsx       → /posts/<slug>  (HTML)
+├── md/[...path]/route.ts     → /md/<*path>    (markdown handler)
+└── llms.txt/route.ts         → /llms.txt
+```
+
+## Install
+
+```bash
+pnpm add @dualmark/core @dualmark/converters
+```
+
+## middleware.ts
+
+```ts
+import { detectAIBot, negotiateFormat } from "@dualmark/core";
+import { NextResponse, type NextRequest } from "next/server";
+
+export const config = {
+  matcher: [
+    {
+      source: "/((?!_next/|favicon.ico).*)",
+      missing: [{ type: "header", key: "next-router-prefetch" }],
+    },
+  ],
+};
+
+function toMarkdownInternalPath(pathname: string): string {
+  const clean = pathname.replace(/\.md$/, "").replace(/\/$/, "");
+  if (clean === "" || clean === "/") return "/md/index";
+  return `/md${clean}`;
+}
+
+export function middleware(req: NextRequest) {
+  const { pathname } = req.nextUrl;
+
+  if (pathname === "/llms.txt") return NextResponse.next();
+
+  if (pathname.endsWith(".md")) {
+    const url = req.nextUrl.clone();
+    url.pathname = toMarkdownInternalPath(pathname);
+    return NextResponse.rewrite(url);
+  }
+
+  const ua = req.headers.get("user-agent") ?? "";
+  const accept = req.headers.get("accept") ?? "";
+  const bot = detectAIBot(ua);
+  const fmt = negotiateFormat(accept);
+
+  if (bot.isBot || fmt === "markdown") {
+    const url = req.nextUrl.clone();
+    url.pathname = toMarkdownInternalPath(pathname);
+    return NextResponse.rewrite(url);
+  }
+
+  if (fmt === null && accept) {
+    return new NextResponse("Not Acceptable\n", {
+      status: 406,
+      headers: { "Content-Type": "text/plain; charset=utf-8", Vary: "Accept" },
+    });
+  }
+
+  const res = NextResponse.next();
+  const mdPath = pathname.replace(/\/$/, "") + ".md";
+  res.headers.set("Link", `<${mdPath}>; rel="alternate"; type="text/markdown"`);
+  res.headers.append("Vary", "Accept");
+  return res;
+}
+```
+
+## app/md/[...path]/route.ts
+
+```ts
+import { markdownResponse } from "@dualmark/core";
+import { blogConverter } from "@dualmark/converters";
+
+const convert = blogConverter({ siteUrl: "https://example.com", basePath: "/posts" });
+
+export async function GET(_req: Request, ctx: { params: Promise<{ path: string[] }> }) {
+  const { path } = await ctx.params;
+  const joined = "/" + path.join("/");
+
+  const postMatch = /^\/posts\/([^/]+)$/.exec(joined);
+  if (postMatch && postMatch[1]) {
+    const post = getPostFromYourSource(postMatch[1]);
+    if (!post) return new Response("Not Found", { status: 404 });
+    return markdownResponse(convert(post), { cacheControl: "public, max-age=3600" });
+  }
+
+  return new Response("Not Found", { status: 404 });
+}
+```
+
+<Callout>
+  **Production note**: `next start` serves prerendered 404s for unknown slugs (like `.md` suffixes) from cache *before* invoking middleware, which can shadow the rewrite. On Vercel and other production-grade hosts, middleware runs at the edge before any cache layer, so this isn't an issue. For local conformance verification, use `next dev`.
+</Callout>

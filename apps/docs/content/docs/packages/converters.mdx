@@ -1,0 +1,87 @@
+---
+title: "@dualmark/converters"
+description: 12 production-tested markdown converter factories.
+---
+
+```bash
+pnpm add @dualmark/converters @dualmark/core
+```
+
+Each factory takes a config object and returns `(entry: CollectionEntry<Data>) => string`.
+
+## Available converters
+
+| Factory | Domain |
+| --- | --- |
+| `blogConverter` | Blog posts |
+| `caseStudyConverter` | Case studies (with stats) |
+| `glossaryConverter` | Glossary terms (with learn-more + canonical-blog) |
+| `legalConverter` | Legal pages |
+| `compareConverter` | Comparison pages (us vs competitor table) |
+| `productConverter` | Product pages with siblings, FAQ auto-generation |
+| `toolConverter` | Standalone tools |
+| `videoConverter` | Video pages |
+| `taxConverter` | Tax pSEO with country/currency/payment-method cross-links |
+| `countryConverter` | Country pSEO |
+| `paymentMethodConverter` | Payment method pSEO |
+| `currencyConverter` | Currency pSEO |
+
+## Common shape
+
+```ts
+import { blogConverter } from "@dualmark/converters";
+
+const convert = blogConverter({
+  siteUrl: "https://example.com",
+  basePath: "/blog",
+  categoryBasePath: "/blog/category",
+  brandFooter: "## About\n\nWe build widgets.",
+});
+
+const md = convert({
+  id: "first-post",
+  data: {
+    title: "Hello",
+    description: "First post",
+    publishedDate: new Date("2026-05-05"),
+    author: "Alice",
+    category: "announcements",
+  },
+  body: "Long-form content.",
+});
+```
+
+## All factories accept
+
+```ts
+interface BaseConverterConfig {
+  siteUrl: string;        // required, used for absolute URLs
+  brandFooter?: string;   // appended to every output
+}
+```
+
+Plus factory-specific options. See package source for full signatures — each is one small file at `packages/converters/src/<name>.ts`.
+
+## Wiring into Astro
+
+When using the Astro integration, refer to converters by name:
+
+```ts
+dualmark({
+  collections: {
+    blog: { converter: "blog" },
+    glossary: { converter: "glossary" },
+    products: { converter: "product" },
+  },
+});
+```
+
+Or pass a custom function for one-off needs:
+
+```ts
+collections: {
+  changelog: {
+    converter: (entry) => `# ${entry.data.version}\n\n${entry.body}`,
+  },
+}
+```

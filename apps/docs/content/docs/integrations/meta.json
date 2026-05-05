@@ -1,0 +1,4 @@
+{
+  "title": "Integrations",
+  "pages": ["astro", "cloudflare-workers", "nextjs", "manual"]
+}

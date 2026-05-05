@@ -1,0 +1,61 @@
+---
+title: Quickstart
+description: Get a fully dual-marked Astro site running in under 2 minutes.
+---
+
+The fastest path to a fully dual-marked site is the Astro integration.
+
+## 1. Install
+
+```bash
+pnpm add @dualmark/astro @dualmark/core @dualmark/converters
+```
+
+## 2. Configure
+
+Add Dualmark to your `astro.config.mjs`:
+
+```js
+import { defineConfig } from "astro/config";
+import dualmark from "@dualmark/astro";
+
+export default defineConfig({
+  site: "https://example.com",
+  integrations: [
+    dualmark({
+      siteUrl: "https://example.com",
+      collections: {
+        blog: { converter: "blog" },
+      },
+      llmsTxt: { enabled: true },
+    }),
+  ],
+});
+```
+
+## 3. Build
+
+```bash
+pnpm build
+```
+
+Every blog post now has a markdown twin at `/blog/<slug>.md`, an `llms.txt` is auto-generated, and an Astro middleware injects the `Link: <…>; rel="alternate"; type="text/markdown"` header on every HTML response.
+
+## 4. Verify
+
+```bash
+pnpm dev
+# in another terminal:
+npx @dualmark/cli verify http://localhost:4321/blog/your-post
+```
+
+Expect `Score 80/80 (or higher with full negotiation)`.
+
+## Next steps
+
+<Cards>
+  <Card title="Integration: Astro" href="/docs/integrations/astro">Full options for the @dualmark/astro integration.</Card>
+  <Card title="Integration: Cloudflare" href="/docs/integrations/cloudflare-workers">Add createAEOWorker for edge-level negotiation.</Card>
+  <Card title="Integration: Next.js" href="/docs/integrations/nextjs">Wire @dualmark/core into Next.js App Router manually.</Card>
+  <Card title="The AEO Spec" href="/docs/spec/overview">Implement Dualmark in any language.</Card>
+</Cards>
