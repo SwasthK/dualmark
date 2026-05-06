@@ -96,18 +96,18 @@ export function ConformanceDemo() {
         </div>
       </div>
 
-      <div className="mx-auto mt-8 grid max-w-4xl grid-cols-3 gap-3">
+      <div className="mx-auto mt-8 grid max-w-4xl grid-cols-3 gap-2 sm:gap-3">
         {tiers.map((tier) => (
           <div
             key={tier.label}
-            className="flex items-center justify-between rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-elev-1)] px-4 py-3"
+            className="flex min-w-0 flex-col items-start gap-1 rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-elev-1)] px-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-3 sm:px-4"
           >
-            <div>
-              <div className="text-sm font-medium text-[var(--color-fg)]">{tier.label}</div>
+            <div className="min-w-0">
+              <div className="truncate text-sm font-medium text-[var(--color-fg)]">{tier.label}</div>
               <div className="text-xs text-[var(--color-fg-subtle)]">conformance</div>
             </div>
             <span
-              className="font-mono text-lg font-medium"
+              className="font-mono text-base font-medium leading-none sm:text-lg"
               style={{ color: tier.color }}
             >
               {tier.threshold}
