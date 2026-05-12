@@ -156,7 +156,7 @@ yourcompany.com/llms.txt            ← AI agents discover everything
 
 Same URL. Same content. Different rendering. Picked automatically by:
 - `Accept: text/markdown` header → markdown
-- Known AI bot User-Agent (GPTBot, ClaudeBot, PerplexityBot, +16 more) → markdown
+- Known AI bot User-Agent (GPTBot, ClaudeBot, PerplexityBot, +21 more) → markdown
 - Direct `.md` URL → markdown
 - Anything else → HTML, with `Link rel="alternate"` pointing to the twin
 
@@ -238,7 +238,7 @@ Three conformance levels — **Basic** (60%), **Standard** (80%), **Advanced** (
 
 | Package | npm | Size | What it does |
 |---|---|---|---|
-| [`@dualmark/core`](./packages/core) | `npm i @dualmark/core` | 14 KB | Framework-agnostic primitives: content negotiation (RFC 7231), AI-bot detection (19 known bots), markdown response builder, token estimation, composition helpers, `llms.txt` rendering. Zero runtime deps. |
+| [`@dualmark/core`](./packages/core) | `npm i @dualmark/core` | 14 KB | Framework-agnostic primitives: content negotiation (RFC 7231), AI-bot detection (24 known bots), markdown response builder, token estimation, composition helpers, `llms.txt` rendering. Zero runtime deps. |
 | [`@dualmark/converters`](./packages/converters) | `npm i @dualmark/converters` | 16 KB | 12 production-tested converter factories. |
 | [`@dualmark/astro`](./packages/astro) | `npm i @dualmark/astro` | 22 KB | Astro 5 integration. Auto-generates `.md` endpoints, ships middleware, generates `llms.txt`. |
 | [`@dualmark/nextjs`](./packages/nextjs) | `npm i @dualmark/nextjs` | 15 KB | Next.js App Router adapter. `withDualmark()`, `createDualmarkMiddleware()`, `createDualmarkRouteHandler()`, `createLlmsTxtHandler()`. |
@@ -258,7 +258,7 @@ Plus:
 
 | Surface | Status |
 |---|---|
-| `@dualmark/core` | 167 tests pass (vitest + fast-check property tests) |
+| `@dualmark/core` | 172 tests pass (vitest + fast-check property tests) |
 | `@dualmark/converters` | 24 tests pass |
 | `@dualmark/cloudflare` | 23 tests pass |
 | `@dualmark/cli` | 17 tests pass |
@@ -272,7 +272,7 @@ Plus:
 
 ```bash
 bun install
-bun run build && bun run test && bun run typecheck   # 313 tests across 6 packages
+bun run build && bun run test && bun run typecheck   # 318 tests across 6 packages
 ```
 
 ---

@@ -13,7 +13,7 @@ bun add @dualmark/core
 ## What's in it
 
 - **Content negotiation** (`parseAcceptHeader`, `negotiateFormat`) — RFC 7231 §5.3.2 compliant
-- **AI bot detection** (`detectAIBot`, `AI_BOTS`) — registry of 19 known crawlers with vendor + purpose metadata
+- **AI bot detection** (`detectAIBot`, `AI_BOTS`) — registry of 24 known crawlers with vendor + purpose metadata
 - **Markdown response** (`markdownResponse`, `injectMarkdownAlternateLink`) — builds `Response` objects with all AEO headers
 - **Path utilities** (`toMarkdownPath`, `toMarkdownUrl`) — convert HTML paths/URLs to their markdown twins
 - **Token estimation** (`estimateTokens`) — default is whitespace-split
