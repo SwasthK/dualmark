@@ -88,7 +88,7 @@ export function Transform() {
           Accept
         </code>{" "}
         header for known clients and by User-Agent for the 19 most-common AI
-        crawlers (GPTBot, ClaudeBot, PerplexityBot, +16 more).
+        crawlers (GPTBot, ClaudeBot, PerplexityBot, +21 more).
       </p>
     </Section>
   );

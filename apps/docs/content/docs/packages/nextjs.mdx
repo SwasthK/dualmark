@@ -60,7 +60,7 @@ _On Next.js ≤15, name the file `middleware.ts` instead. Body is identical._
 The middleware:
 
 - Rewrites `*.md` URLs to the internal `/md/<path>` namespace
-- Detects 19 known AI bot User-Agents and rewrites their requests to markdown
+- Detects 24 known AI bot User-Agents and rewrites their requests to markdown
 - Honors `Accept: text/markdown` per RFC 7231
 - Returns `406 Not Acceptable` when the request explicitly excludes both `text/html` and `text/markdown`
 - Adds `Link: <…>; rel="alternate"; type="text/markdown"` and `Vary: Accept` to HTML responses

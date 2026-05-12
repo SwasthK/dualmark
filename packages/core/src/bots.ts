@@ -57,10 +57,31 @@ export const AI_BOTS: ReadonlyArray<AIBotEntry> = [
     purpose: "user-action",
   },
   {
+    name: "Claude-SearchBot",
+    uaPattern: "Claude-SearchBot",
+    vendor: "Anthropic",
+    purpose: "search",
+    docsUrl: "https://support.anthropic.com/en/articles/8896518",
+  },
+  {
+    name: "Claude-User",
+    uaPattern: "Claude-User",
+    vendor: "Anthropic",
+    purpose: "user-action",
+    docsUrl: "https://support.anthropic.com/en/articles/8896518",
+  },
+  {
     name: "PerplexityBot",
     uaPattern: "PerplexityBot",
     vendor: "Perplexity",
     purpose: "search",
+    docsUrl: "https://docs.perplexity.ai/guides/bots",
+  },
+  {
+    name: "Perplexity-User",
+    uaPattern: "Perplexity-User",
+    vendor: "Perplexity",
+    purpose: "user-action",
     docsUrl: "https://docs.perplexity.ai/guides/bots",
   },
   {
@@ -94,6 +115,12 @@ export const AI_BOTS: ReadonlyArray<AIBotEntry> = [
     name: "Bytespider",
     uaPattern: "Bytespider",
     vendor: "ByteDance",
+    purpose: "training",
+  },
+  {
+    name: "DeepSeekBot",
+    uaPattern: "DeepSeekBot",
+    vendor: "DeepSeek",
     purpose: "training",
   },
   {
@@ -136,6 +163,12 @@ export const AI_BOTS: ReadonlyArray<AIBotEntry> = [
   {
     name: "Meta-ExternalAgent",
     uaPattern: "meta-externalagent",
+    vendor: "Meta",
+    purpose: "training",
+  },
+  {
+    name: "Meta-ExternalFetcher",
+    uaPattern: "ExternalFetcher",
     vendor: "Meta",
     purpose: "training",
   },
