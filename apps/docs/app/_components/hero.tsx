@@ -67,6 +67,21 @@ export function Hero() {
           </span>
         </div>
 
+        <a
+          href="https://www.producthunt.com/products/dodo-payments/launches/dualmark"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-8 inline-block transition-opacity hover:opacity-90"
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            alt="Dualmark - Open-source AEO infrastructure for marketing sites | Product Hunt"
+            width={250}
+            height={54}
+            src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1145226&theme=light&t=1778657110384"
+          />
+        </a>
+
         <div className="mt-16 w-full max-w-3xl animate-[var(--animate-fade-in-up)]">
           <VerifyTerminal />
         </div>
